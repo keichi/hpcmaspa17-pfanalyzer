@@ -4,6 +4,14 @@ Placeholder
 
 \begin{figure}[htbp]
     \centering
+    \includegraphics{tracer_block}
+    \caption{Overhead on the bandwidth for Send/Recv}
+    \label{fig:bandwidth-overhead}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
     \includegraphics{traffic_matrix}
     \caption{Overhead on the bandwidth for Send/Recv}
     \label{fig:bandwidth-overhead}
