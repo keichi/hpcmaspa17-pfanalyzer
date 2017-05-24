@@ -319,3 +319,7 @@ ENV/
 /site
 
 .direnv/
+*.tex-e
+src/*.tex
+!src/main.tex
+main.pdf

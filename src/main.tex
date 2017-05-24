@@ -1,0 +1,128 @@
+\documentclass[10pt, a4paper]{IEEEtran}
+
+% Package imports
+\usepackage[style=ieee,citestyle=numeric]{biblatex}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage{flushend}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{newclude}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage[format=hang]{subfig}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\RequirePackage[l2tabu, orthodox]{nag}
+
+% Fix for pandoc 1.14
+\providecommand{\tightlist}{}
+
+\graphicspath{{./img/}}
+
+% Source code
+\lstset{%
+  language={C},
+  basicstyle={\small\ttfamily},%
+  identifierstyle={\small\ttfamily},%
+  commentstyle={\small\itshape},%
+  keywordstyle={\small\bfseries},%
+  ndkeywordstyle={\small\ttfamily},%
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},%
+  numbers=none,%
+  xrightmargin=0em,%
+  xleftmargin=0em,%
+  numberstyle={\scriptsize},%
+  stepnumber=1,
+  numbersep=1em,%
+  lineskip=-0.5ex,%
+  mathescape%
+}
+
+\addbibresource{references.bib}
+
+\begin{document}
+
+\title{Performance Simulation and Evaluation of SDN-enhanced MPI}
+
+\author{%
+    \IEEEauthorblockN{%
+        Keichi Takahashi\IEEEauthorrefmark{1},
+        Susumu Date\IEEEauthorrefmark{1},
+        Dashdavaa Khureltulga\IEEEauthorrefmark{1},
+        Yoshiyuki Kido\IEEEauthorrefmark{1}, \\
+        Hiroaki Yamanaka\IEEEauthorrefmark{2},
+        Eiji Kawai\IEEEauthorrefmark{2},
+        Shinji Shimojo\IEEEauthorrefmark{1}
+    } \\
+    \IEEEauthorblockA{%
+        \IEEEauthorrefmark{1}
+        Osaka University\\
+        Osaka, Japan\\
+        \{takahashi.keichi, huchka\}@ais.cmc.osaka-u.ac.jp,
+        \{date, kido, shimojo\}@cmc.osaka-u.ac.jp
+    } \\
+    \IEEEauthorblockA{%
+        \IEEEauthorrefmark{2}
+        National Institute of Information and Communications Technology\\
+        Tokyo, Japan\\
+        \{hyamanaka, eiji-ka\}@nict.go.jp
+    }
+}
+
+\maketitle
+
+% Abstract
+\begin{abstract}
+    Due to the rapid scale out of high-performance computing systems,
+    interconnects are becoming increasingly large-scale and complex. This
+    trend is making static and over-provisioned interconnects
+    cost-ineffective. We have been developing SDN-enhanced MPI, a framework
+    that optimizes the interconnect to fit the communication patterns of MPI
+    applications by leveraging the dynamic network controllability of
+    Software-Defined Networking (SDN). Our previous works have demonstrated
+    the acceleration of several individual MPI primitives based on the idea of
+    SDN-enhanced MPI\@. However, the effect of SDN-enhanced MPI on the
+    utilization of interconnects and performance of real-world applications is
+    yet unclear. To answer this question, we developed an MPI tracer and
+    online analyzer to extract the communication patterns from applications.
+    Furthermore, we developed an interconnect simulator to investigate the
+    congestion in the interconnect for a given cluster configuration and set
+    of communication patterns. By using these tools, we show how SDN-enhanced
+    MPI can reduce congestion in the interconnect and potentially improve the
+    performance of applications.
+\end{abstract}
+
+\begin{IEEEkeywords}
+    Message Passing Interface, Software Defined Network, OpenFlow, Interconnects
+\end{IEEEkeywords}
+
+% Body
+\include*{src/1_intro}
+\include*{src/2_goal}
+\include*{src/3_proposal}
+\include*{src/4_evaluation}
+\include*{src/5_literature_review}
+\include*{src/6_conclusion_and_future_work}
+
+\section*{Acknowledgement}
+This work was supported by JSPS KAKENHI Grant Number JP26330145. This research
+was partly supported by collaborative research of the National Institute of
+Information and Communication Technology and Osaka University (Research on
+high functional network platform technology for large-scale distributed
+computing).
+
+
+% Bibliography
+\printbibliography[heading=bibintoc,title={References}]
+
+% Fix bibliography indentation issue
+\par\leavevmode
+
+\end{document}
