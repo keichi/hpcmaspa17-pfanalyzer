@@ -5,27 +5,27 @@ Placeholder
 \begin{figure}[htbp]
     \centering
     \includegraphics{latency_overhead}
-    \caption{Overhead on the latency for Send/Recv}
+    \caption{Latency of MPI\_Send/Recv between two nodes}
     \label{fig:latency-overhead}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{bandwidth_overhead}
-    \caption{Overhead on the bandwidth for Send/Recv}
+    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
     \label{fig:bandwidth-overhead}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{nas_cg_execution_time}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Execution Time of NAS CG Benchmark}
+    \label{fig:nas-cg-time}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{nersc_milc_execution_time}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Execution Time of NERSC MILC Benchmark}
+    \label{fig:nersc-milc-time}
 \end{figure}

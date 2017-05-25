@@ -5,28 +5,34 @@ Placeholder
 \begin{figure}[htbp]
     \centering
     \includegraphics{tracer_block}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Block Diagram of MPI Tracer}
+    \label{fig:tracer-block}
 \end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{simulator_block}
+    \caption{Block Diagram of Cluster Simulator}
+    \label{fig:simulator-block}
+\end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{traffic_matrix}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Obtained Traffic Matrix}
+    \label{fig:traffic-matrix}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{message_matrix}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Obtained Message Number Matrix}
+    \label{fig:message-matrix}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{message_size_histogram}
-    \caption{Overhead on the bandwidth for Send/Recv}
-    \label{fig:bandwidth-overhead}
+    \caption{Histogram of Message Size}
+    \label{fig:message-size-histogram}
 \end{figure}
