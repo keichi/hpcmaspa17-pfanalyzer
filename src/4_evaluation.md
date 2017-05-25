@@ -1,6 +1,8 @@
 # Evaluation
 
-Placeholder
+## Evaluation Environment
+
+## Overhead of Tracer
 
 \begin{figure}[htbp]
     \centering
@@ -16,6 +18,8 @@ Placeholder
     \label{fig:bandwidth-overhead}
 \end{figure}
 
+## Congestion in the Interconnect
+
 \begin{figure}[htbp]
     \centering
     \includegraphics{nas_cg_congestion}
@@ -29,6 +33,8 @@ Placeholder
     \caption{Maximum Congestion while running NERSC MILC Benchmark}
     \label{fig:nersc-milc-congestion}
 \end{figure}
+
+## Benchmark Results
 
 \begin{figure}[htbp]
     \centering

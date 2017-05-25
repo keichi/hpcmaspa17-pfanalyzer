@@ -1,19 +1,12 @@
 # Proposal
 
-Placeholder
+## MPI Tracer
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{tracer_block}
     \caption{Block Diagram of MPI Tracer}
     \label{fig:tracer-block}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics{simulator_block}
-    \caption{Block Diagram of Cluster Simulator}
-    \label{fig:simulator-block}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -35,4 +28,13 @@ Placeholder
     \includegraphics{message_size_histogram}
     \caption{Histogram of Message Size}
     \label{fig:message-size-histogram}
+\end{figure}
+
+## Cluster Simulator
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{simulator_block}
+    \caption{Block Diagram of Cluster Simulator}
+    \label{fig:simulator-block}
 \end{figure}
