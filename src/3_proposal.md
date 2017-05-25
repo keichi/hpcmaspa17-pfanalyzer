@@ -2,6 +2,26 @@
 
 ## MPI Tracer
 
+To collect the communication patterns from MPI applications, we developed an
+MPI tracer.
+
+Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
+Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace MPI functions with their
+When an application calls an MPI function, the tracer records the timestamp
+and arguments.
+
+The problem of this design is that it cannot capture the actual communication
+of collective communications. Generally, MPI implementations realize
+collective communications with a series of point-to-point communications.
+MPI tracers relying on hooking MPI functions cannot capture such underlying
+point-to-point communications. This can lead to wrong communication patterns
+for applications where collective communications are dominant compared to
+point-to-point communications.
+
+To solve this problem and correctly capture every point-to-point
+communication, we utilize the MPI PERUSE interface\ [@Jones2006].
+
+
 \begin{figure}[htbp]
     \centering
     \includegraphics{tracer_block}
