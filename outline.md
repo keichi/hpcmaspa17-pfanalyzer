@@ -1,6 +1,7 @@
-# タイトル
+## タイトル
 
-未定
+- A Toolset for Analyzing Dynamic and Application-aware Interconnects
+- Performance Analysis Tools for Dynamic and Application-aware Interconnects
 
 ## アブストラクト
 
@@ -26,11 +27,8 @@ improve the performance of applications.
 - クラスタのスケールアウトとともに相互結合網が大規模・複雑化
 - 現在の静的かつ過剰投資を前提とした設計は、性能価格比が悪化
 - アプリケーションの通信パターンに応じて相互結合網を動的に制御することで、
-  相互結合網をより効率的に利用し、プロセス間通信を高速化できないか
-- このアイディアのProof-of-Conceptとして、SDNによって相互結合網を動的に
-  制御することでMPI通信を高速化することを目的とした、SDN-enhanced MPIを提案した
-- これまでのSDN-enhanced MPIに関する研究では、いくつかのMPI関数について
-  高速化を実証した
+  相互結合網をより効率的に利用し、プロセス間通信を高速化できないか (例:
+  SDN-enhanced MPI)
 
 (タイトル・アブストラクトと合わせて1.5ページ)
 
@@ -124,11 +122,23 @@ improve the performance of applications.
 ## 関連研究
 
 - ORCS: An Oblivious Routing Congestion Simulator
+    - Pros: リンクの輻輳量をシミュレート, 統計的な解析機能が充実
+    - Cons: 動的なルーティングは非対応, 通信パターンは事前定義されたもののみ
 - A Simulation and Emulation Study of SDN-based Multipath Routing for
   Fat-tree Data Center Networks
-- Evaluating HPC Networks via Simulation of Parallel Workloads
+    - Pros: シミュレーションとエミュレーションの両方で評価
+    - Cons: 通信パターンはランダムのみ
 - PSINS: An Open Source Event Tracer and Execution Simulator for MPI
   Applications
+    - Pros: 実アプリケーションのトレースを元にシミュレーション
+    - Cons: ネットワークのモデルが単純で、トポロジやルーティングを考慮していな
+      い
+- LogGOPSim: Simulating Large-Scale Applications in the LogGOPS Model
+    - Pros: パケットレベルでの精確なシミュレーション, トレースを使用
+    - Cons: 輻輳、トポロジやルーティングを考慮していない
+- A Simulator for Large-scale Parallel Computer Architectures
+    - Pros: パケットレベルでの精確なシミュレーション, トレースを使用
+    - Cons: 動的なルーティングは非対応
 
 (以降の節と合わせて1ページ)
 
