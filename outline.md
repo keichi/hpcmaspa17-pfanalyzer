@@ -7,14 +7,24 @@
 
 Due to the rapid scale out of high-performance computing systems,
 interconnects are becoming increasingly large-scale and complex. This trend is
-making static and over-provisioned interconnects cost-ineffective. We have
+making static and over-provisioned interconnects cost-ineffective.
+
+We have
 been developing SDN-enhanced MPI, a framework that optimizes the interconnect
 to fit the communication patterns of MPI applications by leveraging the
 dynamic network controllability of Software-Defined Networking (SDN). Our
 previous works have demonstrated the acceleration of several individual MPI
-primitives based on the idea of SDN-enhanced MPI. However, the effect of
+primitives based on the idea of SDN-enhanced MPI.
+
+drive more efficient future HPC system design
+
+insight
+
+However, the effect of
 SDN-enhanced MPI on the utilization of interconnects and performance of
-real-world applications is yet unclear. To answer this question, we developed
+real-world applications is yet unclear.
+
+To answer this question, we developed
 an MPI tracer and online analyzer to extract the communication patterns from
 applications. Furthermore, we developed an interconnect simulator to
 investigate the congestion in the interconnect for a given cluster
@@ -25,23 +35,39 @@ improve the performance of applications.
 ## 背景
 
 - クラスタのスケールアウトとともに相互結合網が大規模・複雑化
-- 現在の静的かつ過剰投資を前提とした設計は、性能価格比が悪化
+- 現在の静的かつ過剰投資を前提とした設計は、価格性能比が悪化
 - アプリケーションの通信パターンに応じて相互結合網を動的に制御することで、
-  相互結合網をより効率的に利用し、プロセス間通信を高速化できないか (例:
-  SDN-enhanced MPI)
+  相互結合網をより効率的に利用し、プロセス間通信を高速化できないか
+- この仮説に基づき、我々は動的な相互結合網の研究開発を推進してきた
+- ??
+- 実機のクラスタでは1回の実験に時間がかる上、高並列な実験ができるほど大規模
+  かつ動的な相互結合網を備えたクラスタがない
+- シミュレータでクラスタと相互結合網をシミュレートすることで、相互結合網や
+  とその制御方法の性能をより容易に調査できると考えられる
 
 (タイトル・アブストラクトと合わせて1.5ページ)
 
-## 問題
+## 問題・目的
 
-- 実アプリケーションにおいて、複数のMPI関数がそれぞれ異なる引数で呼びだれされる
-  際のSDN-enhanced MPIの性能向上効果は未だ不明
-- 実機の小規模なSDN-enabledクラスタでは1回の実験に時間がかる上、
-  大規模・高並列な実験ができない
+- 既に、InfiniBandなどの静的な相互結合網に基づくクラスタをシミュレートする
+  ツールは様々なものが開発されてきた
+- しかし、動的な相互結合網の研究において、相互結合網と制御方法の性能を調査し、
+  洞察を得るためには、シミュレータは下記の要件を満たしている必要がある:
+    - 動的な相互結合網のシミュレーション
+    - 複数ジョブの並列実行と、それにともなうジョブのスケジューリング・
+      プロセス配置の包括的シミュレーション
+    - 実アプリケーションの通信パターンの入力
+    - 軽量・高速
+- 上記の機能を全て備えたシミュレータは未だない
+- 動的な相互結合網の設計・運用者や、研究者の一助となることを期待して、
+  シミュレータのプロトタイプを試作する
 
 (0.5ページ)
 
 ## 提案
+
+??
+動的な相互結合網の研究開発にシミュレータと、その他必要なツールを開発する。
 
 ### 概要
 
