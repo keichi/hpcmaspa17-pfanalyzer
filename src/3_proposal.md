@@ -1,32 +1,34 @@
 # Proposal
 
-## MPI Tracer
+## MPI Profiler
 
 To collect the communication patterns from MPI applications, we developed an
-MPI tracer.
+MPI profiler.
 
 Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
-Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace MPI functions with their
-When an application calls an MPI function, the tracer records the timestamp
-and arguments.
+Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI functions
+provided by MPI libraries with instrumented ones. Since this approach hooks
+function calls to MPI functions, it is unable to capture information on the
+internals of MPI implementations. This can be problematic when profiling MPI
+collective communication functions (MPI_Bcast, MPI_Allreduce, MPI_Reduce,
+_etc._). In general, collective communication functions are implemented as a
+combination of multiple point-to-point communication in MPI implementations.
+MPI profilers based on hooking MPI functions cannot capture the occurrence of
+such underlying point-to-point communications. As a result, wrong
+communication patterns are obtained when profiling applications using
+collective communications.
 
-The problem of this design is that it cannot capture the actual communication
-of collective communications. Generally, MPI implementations realize
-collective communications with a series of point-to-point communications.
-MPI tracers relying on hooking MPI functions cannot capture such underlying
-point-to-point communications. This can lead to wrong communication patterns
-for applications where collective communications are dominant compared to
-point-to-point communications.
+To solve this problem and accurately capture underlying point-to-point
+communication of collective communication, we utilize the MPI PERUSE
+interface\ [@Jones2006].
 
-To solve this problem and correctly capture every point-to-point
-communication, we utilize the MPI PERUSE interface\ [@Jones2006].
-
+\ [@Keller2006]
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{tracer_block}
-    \caption{Block Diagram of MPI Tracer}
-    \label{fig:tracer-block}
+    \caption{Block Diagram of MPI Profiler}
+    \label{fig:profiler-block}
 \end{figure}
 
 \begin{figure}[htbp]
