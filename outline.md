@@ -1,36 +1,26 @@
-## タイトル
+## タイトル案
 
 - A Toolset for Analyzing Dynamic and Application-aware Interconnects
 - Performance Analysis Tools for Dynamic and Application-aware Interconnects
+- Simulator for Assessing the Effect of Dynamic Network Controllability on Interconnects
 
 ## アブストラクト
 
 Due to the rapid scale out of high-performance computing systems,
 interconnects are becoming increasingly large-scale and complex. This trend is
 making static and over-provisioned interconnects cost-ineffective.
-
-We have
-been developing SDN-enhanced MPI, a framework that optimizes the interconnect
-to fit the communication patterns of MPI applications by leveraging the
-dynamic network controllability of Software-Defined Networking (SDN). Our
-previous works have demonstrated the acceleration of several individual MPI
-primitives based on the idea of SDN-enhanced MPI.
-
-drive more efficient future HPC system design
-
-insight
-
-However, the effect of
-SDN-enhanced MPI on the utilization of interconnects and performance of
-real-world applications is yet unclear.
-
-To answer this question, we developed
-an MPI tracer and online analyzer to extract the communication patterns from
-applications. Furthermore, we developed an interconnect simulator to
-investigate the congestion in the interconnect for a given cluster
-configuration and set of communication patterns. By using these tools, we show
-how SDN-enhanced MPI can reduce congestion in the interconnect and potentially
-improve the performance of applications.
+We believe that dynamically optimizing the interconnect to fit the
+communication pattern of applications can increase the utilization of
+interconnects and improve application performance. Although simulators for
+static interconnects has been extensively researched and developed, little
+effort has been put for the simulation of dynamically controlled
+interconnects. To facilitate the analysis and understanding of the performance
+benefits of dynamic interconnects, we develop a simulator specialized for
+dynamic interconnects. This simulator allows interconnect researchers and
+designers to investigate the congestion in the interconnect for a given cluster
+configuration and set of communication patterns collected by a dedicated tool.
+By using these tools, we show how dynamically controlling the  interconnects
+can reduce congestion and potentially improve the performance of applications.
 
 ## 背景
 
@@ -75,7 +65,7 @@ improve the performance of applications.
 - 動的な相互結合網の研究開発に必要なシミュレータと、付随するツールを開発する
 - ジョブ実行中にプロセス間の通信パターンは変化しないと仮定し、
   通信パターンとしてトレースの代わりにトラフィックマトリックスを用いる
-- これにより入力データが大幅に減り、高速・軽量なシミュレーションを実現できる
+- これにより入力データ量が大幅に減り、高速・軽量なシミュレーションを実現できる
 
 ### MPIプロファイラ
 
