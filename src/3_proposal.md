@@ -22,8 +22,6 @@ To solve this problem and accurately capture underlying point-to-point
 communication of collective communication, we utilize the MPI PERUSE
 interface\ [@Jones2006].
 
-\ [@Keller2006]
-
 \begin{figure}[htbp]
     \centering
     \includegraphics{tracer_block}
