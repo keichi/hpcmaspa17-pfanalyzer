@@ -6,18 +6,18 @@ clusters heavily affects the total performance of communication-intensive
 applications. In communication-intensive applications, low-latency and
 high-bandwidth communication between computing nodes is essential to fully
 exploit the computational power and parallelism of the computing nodes.
-High performance networks that enables such fast communication between
-computing nodes of a cluster are often called _interconnects_. Message Passing
-Interface (MPI)\ [@MessagePassingInterfaceForum2015; @Gropp2014] is a commonly
-used inter-process communication library to describe communication on HPC
-clusters.
+High performance networks that provide such fast communication between
+computing nodes of a cluster are often referred to as _interconnects_. Message
+Passing Interface (MPI)\ [@MessagePassingInterfaceForum2015; @Gropp2014] is a
+commonly used inter-process communication library to describe communication on
+HPC clusters.
 
 <!-- 現在の相互結合網のトレンド (静的、それ故の過剰投資) -->
 Nowadays, majority of HPC clusters employ statically controlled interconnects.
 A well-known exemplifier is InfiniBand\ [@InfiniBand2015], where forwarding
 tables of switches are populated with pre-computed forwarding rules in advance
 of the execution of applications. Since static interconnects are controlled
-without the considering the communication patterns of individual applications,
+without considering the communication patterns of individual applications,
 they are usually designed on an over-provisioning basis to achieve good
 performance for a variety of applications each with different communication
 pattern.
@@ -50,7 +50,7 @@ slows down the repetitive process of evaluation and improvement. Second,
 large-scale deployments of dynamic interconnects that allow execution of
 highly parallel applications are still not available. Third, network switches
 may not support measuring traffic in the interconnect with enough high
-frequency and precision to obtain insights.
+frequency and precision to obtain meaningful insights.
 
 <!-- シミュレータの有用性 -->
 On the contrary, interconnect simulators have several advantages compared to
@@ -65,24 +65,25 @@ to acquire on physical clusters.
 In fact, a wide spectrum of interconnect simulators\ [@Schneider2009;
 @Tikir2009; @Hoefler2010; @Jo2015] have been developed each with different
 focus and aim. However, existing simulators mostly focused on static
-interconnects and few researches has been done to simulate dynamic and
+interconnects and few researches have been done to simulate dynamic and
 application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
 In this paper, we design and develop a prototype of an interconnect simulator
 specialized for dynamic interconnects to facilitate the research and
-development of dynamic interconnects. Our proposed simulator takes a set of
+development of such interconnects. Our proposed simulator takes a set of
 communication patterns of applications and a cluster configuration as its
-input and simulates the congestion in each link of the interconnect. To allow
-the simulation of dynamic and application-aware routing, routing modules can
-take communication patterns as their input and make routing decision based on
-the patterns. Also, the simulator is capable of running multiple jobs
-concurrently to reproduce a realistic HPC cluster environment. Job scheduling,
-node selection and process mapping are also simulated. This simulator is
-designed to be lightweight and fast to allow research and development based on
-trial and error. In addition to the simulator, we also design and develop a
-custom profiler to extract communication patterns from applications for use
-with our proposed simulator.
+input and simulates the congestion on each link of the interconnect. To allow
+the simulation of dynamic and application-aware interconnects, the routing
+module of the simulator accepts communication patterns as its input and
+dynamically makes routing decision based on the pattern. Also, the simulator
+is capable of concurrently running multiple jobs to reproduce a realistic HPC
+cluster environment. Job scheduling, node selection and process mapping are
+also simulated. This simulator is designed to be lightweight and fast to allow
+research and development based on trial and error. In addition to the
+simulator, we also design and develop a custom profiler to extract
+communication patterns from applications for use in conjunction with our
+proposed simulator.
 
 <!-- この論文の貢献 -->
 The contributions of this paper are summarized as follows:
@@ -90,7 +91,7 @@ The contributions of this paper are summarized as follows:
 - A lightweight interconnect simulator for simulating dynamic and
   application-aware interconnects with multiple running jobs
 - A custom profiler for extracting communication patterns from applications
-- Simulation results for NAS CG benchmark and NERSC MILC benchmarkon a
+- Simulation results for NAS CG benchmark and NERSC MILC benchmark on a
   fat-tree interconnect
 
 <!-- アウトライン -->
@@ -98,8 +99,8 @@ The rest of this paper is organized as follows. Section
 \ref{research-objective} examines the requirements of an interconnect
 simulator for dynamic and application-aware interconnects. Section
 \ref{proposal} describes the design and implementation of our presented
-simulator and profiler. Section \ref{evaluation} presents simulation results
-for NAS CG benchmark and NERSC MILC benchmark obtained with our proposed
-simulator. Also, results of a verification experiment on a physical cluster is
-shown. Section \ref{related-work} reviews related work. Section
+simulator and profiler. Section \ref{evaluation} presents the simulation
+results for NAS CG benchmark and NERSC MILC benchmark obtained with our
+proposed simulator. Also, results of a verification experiment on a physical
+cluster is shown. Section \ref{related-work} reviews related work. Section
 \ref{conclusion} concludes this paper and outline our future work.
