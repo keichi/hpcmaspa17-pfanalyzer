@@ -12,7 +12,7 @@ MPI profiler.
 Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
 Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI functions
 provided by MPI libraries with instrumented ones by using the MPI Profiling
-Interface (PMPI). Since this approach hooks the calls to MPI functions,
+Interface\ (PMPI). Since this approach hooks the calls to MPI functions,
 it is unable to capture information on the internals of MPI implementations.
 This can be problematic when profiling MPI collective communication functions
 (_e.g._ MPI_Bcast, MPI_Allreduce and MPI_Reduce). In general, collective
@@ -55,7 +55,7 @@ hooked to maintain a mapping between global ranks (rank number within
 `MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
 users). This mapping is necessary because PERUSE events are reported with
 local ranks, but profiling results should be described with global ranks for
-the sake of simplicity.
+the easiness of analysis.
 
 \begin{figure}[htbp]
     \centering
@@ -64,11 +64,18 @@ the sake of simplicity.
     \label{fig:profiler-block}
 \end{figure}
 
+The proposed profiler is provided as a form of a shared library, which can be
+integrated into applications at either link time or run time. The preferred
+way is to use run time integration, as it does not require recompilation nor
+relinking of the application. The `LD_PRELOAD` environment variable is used to
+load the shared library before the execution of application.
+
 Figure\ \ref{fig:traffic-matrix} is a visualization of the traffic matrix
 obtained from running the NERSC MILC benchmark with 256 processes.
 Figure\ \ref{fig:message-matrix} is a visualization of number of messages
-exchanged between processes. Figure\ \ref{fig:message-size-histogram} is a
-histogram of message sizes.
+exchanged between processes. These visualizations clearly reveal the spatial
+locality and sparsity of communication between processes.
+Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
 \begin{figure}[htbp]
     \centering
@@ -96,6 +103,13 @@ histogram of message sizes.
 \begin{figure}[htbp]
     \centering
     \includegraphics{simulator_block}
-    \caption{Block Diagram of Cluster Simulator}
+    \caption{Block Diagram of Proposed Interconnect Simulator}
+    \label{fig:simulator-block}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{simulator_flowchart}
+    \caption{Life Cycle of a Simulated Job}
     \label{fig:simulator-block}
 \end{figure}
