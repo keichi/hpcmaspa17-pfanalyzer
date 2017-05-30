@@ -1,8 +1,4 @@
-## タイトル案
-
-- A Toolset for Analyzing Dynamic and Application-aware Interconnects
-- Performance Analysis Tools for Dynamic and Application-aware Interconnects
-- Simulator for Assessing the Effect of Dynamic Network Controllability on Interconnects
+# A Toolset for Analyzing Application-aware Dynamic Interconnects
 
 ## アブストラクト
 
