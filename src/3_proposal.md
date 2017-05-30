@@ -57,26 +57,6 @@ aggregated online by the profiler:
     \label{fig:profiler-block}
 \end{figure}
 
-Furthermore, MPI functions for creating and destroying communicators are also
-hooked to maintain a mapping between global ranks (rank number within
-`MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
-users). This mapping is necessary because PERUSE events are reported with
-local ranks, but profiling results should be described with global ranks for
-the easiness of analysis.
-
-The proposed profiler is provided as a form of a shared library, which can be
-integrated into applications at either link time or run time. The preferred
-way is to use run time integration, as it does not require recompilation nor
-relinking of the application. The `LD_PRELOAD` environment variable is used to
-load the shared library before the execution of application.
-
-Figure\ \ref{fig:traffic-matrix} is a visualization of the traffic matrix
-obtained from running the NERSC MILC benchmark with 256 processes.
-Figure\ \ref{fig:message-matrix} is a visualization of number of messages
-exchanged between processes. These visualizations clearly reveal the spatial
-locality and sparsity of communication between processes.
-Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
-
 \begin{figure*}[t]
     \begin{subfigure}[b]{.32\linewidth}
         \centering
@@ -101,9 +81,31 @@ Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
     \label{fig:profiler-output}
 \end{figure*}
 
+Furthermore, MPI functions for creating and destroying communicators are also
+hooked to maintain a mapping between global ranks (rank number within
+`MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
+users). This mapping is necessary because PERUSE events are reported with
+local ranks, but profiling results should be described with global ranks for
+the easiness of analysis.
+
+The proposed profiler is provided as a form of a shared library, which can be
+integrated into applications at either link time or run time. The preferred
+way is to use run time integration, as it does not require recompilation nor
+relinking of the application. The `LD_PRELOAD` environment variable is used to
+load the shared library before the execution of application.
+
+Figure\ \ref{fig:traffic-matrix} is a visualization of the traffic matrix
+obtained from running the NERSC MILC benchmark with 256 processes.
+Figure\ \ref{fig:message-matrix} is a visualization of number of messages
+exchanged between processes. These visualizations clearly reveal the spatial
+locality and sparsity of communication between processes.
+Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
+
 ## Interconnect Simulator
 
-The proposed simulator takes three types inputs.
+The proposed simulator is based on a discrete-event simulation model.
+Fig.\ \ref{fig:simulator-flowchart}
+Fig.\ \ref{fig:simulator-block}
 
 \begin{figure}[h]
     \centering
@@ -116,5 +118,5 @@ The proposed simulator takes three types inputs.
     \centering
     \includegraphics{simulator_flowchart}
     \caption{Life Cycle of a Simulated Job}
-    \label{fig:simulator-block}
+    \label{fig:simulator-flowchart}
 \end{figure}
