@@ -13,10 +13,12 @@
 \usepackage{newclude}
 \usepackage{newtxtext}
 \usepackage{newtxmath}
-\usepackage[subrefformat=parens]{subcaption}
+\usepackage[labelformat=simple]{subcaption}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \RequirePackage[l2tabu, orthodox]{nag}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
 
 % Fix for pandoc 1.14
 \providecommand{\tightlist}{}

@@ -77,26 +77,29 @@ exchanged between processes. These visualizations clearly reveal the spatial
 locality and sparsity of communication between processes.
 Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
-\begin{figure}[h]
+\begin{figure*}[t]
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{traffic_matrix}
+        \caption{Obtained Traffic Matrix}
+        \label{fig:traffic-matrix}
+    \end{subfigure}
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{message_matrix}
+        \caption{Obtained Message Number Matrix}
+        \label{fig:message-matrix}
+    \end{subfigure}
     \centering
-    \includegraphics{traffic_matrix}
-    \caption{Obtained Traffic Matrix}
-    \label{fig:traffic-matrix}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{message_matrix}
-    \caption{Obtained Message Number Matrix}
-    \label{fig:message-matrix}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{message_size_histogram}
-    \caption{Histogram of Message Size}
-    \label{fig:message-size-histogram}
-\end{figure}
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{message_size_histogram}
+        \caption{Histogram of Message Size}
+        \label{fig:message-size-histogram}
+    \end{subfigure}
+    \caption{Profiler Output for NERSC MILC}
+    \label{fig:profiler-output}
+\end{figure*}
 
 ## Interconnect Simulator
 
