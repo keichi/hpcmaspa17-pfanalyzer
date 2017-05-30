@@ -10,15 +10,15 @@ MPI profiler.
 
 <!-- 既存のプロファイラの問題点 -->
 Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
-Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI functions
-provided by MPI libraries with instrumented ones by using the MPI Profiling
-Interface\ (PMPI). Since this approach hooks the calls to MPI functions,
-it is unable to capture information on the internals of MPI implementations.
-This can be problematic when profiling MPI collective communication functions
-(_e.g._ MPI_Bcast, MPI_Allreduce and MPI_Reduce). In general, collective
-communication functions are implemented as a combination of multiple
-point-to-point communication. However, MPI profilers based on the PMPI
-interface cannot capture the occurrence of such underlying point-to-point
+Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI
+functions provided by MPI libraries with instrumented ones by using the MPI
+Profiling Interface\ (PMPI). Since this approach hooks the calls to MPI
+functions, it is unable to capture information on the internals of MPI
+implementations. This can be problematic when profiling MPI collective
+communication functions (_e.g._ MPI_Bcast, MPI_Allreduce and MPI_Reduce). In
+general, collective communication functions are implemented as a combination
+of multiple point-to-point communication. However, MPI profilers based on the
+PMPI interface cannot capture the occurrence of such underlying point-to-point
 communication. As a result, only a subset of the communication pattern is
 obtained when profiling an application that uses collective communication
 functions.
