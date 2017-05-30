@@ -30,8 +30,8 @@ complex. This technical trend is making static and over-provisioned
 interconnects cost-ineffective and difficult to build.
 
 <!-- 動的な相互結合網の提案 + SDN-enhanced MPI -->
-We believe that dynamically optimizing the interconnect to fit the
-communication patterns of applications can increase the utilization of
+We believe that dynamically optimizing the packet flow in the interconnect to
+fit the communication patterns of applications can increase the utilization of
 interconnect and improve application performance. As a proof of concept, we
 have been developing _SDN-enhanced MPI_, which is a framework that
 incorporates the dynamic network controllability of Software-Defined
@@ -56,10 +56,10 @@ frequency and precision to obtain meaningful insights.
 On the contrary, interconnect simulators have several advantages compared to
 physical clusters and can be a useful tool to analyze and study the effect
 dynamic interconnect control. Simulated clusters can run faster than physical
-clusters by using approximation and omitting details. Also, simulators make
-experiments on extremely large-scale virtual environments possible. They also
-allows measuring and recording metrics that are either difficult or impossible
-to acquire on physical clusters.
+clusters by using approximation and omitting details. Furthermore, simulators
+make experiments on extremely large-scale virtual environments possible. They
+also allow measuring and recording metrics that are either difficult or
+impossible to acquire on physical clusters.
 
 <!-- 現在の相互結合網シミュレータの状況 -->
 In fact, a wide spectrum of interconnect simulators\ [@Schneider2009;
@@ -76,12 +76,12 @@ communication patterns of applications and a cluster configuration as its
 input and simulates the congestion on each link of the interconnect. To allow
 the simulation of dynamic and application-aware interconnects, the routing
 module of the simulator accepts communication patterns as its input and
-dynamically makes routing decision based on the pattern. Also, the simulator
-is capable of concurrently running multiple jobs to reproduce a realistic HPC
-cluster environment. Job scheduling, node selection and process mapping are
-also simulated. This simulator is designed to be lightweight and fast to allow
-research and development based on trial and error. In addition to the
-simulator, we also design and develop a custom profiler to extract
+dynamically makes routing decision based on the pattern. Furthermore, the
+simulator is capable of concurrently running multiple jobs to reproduce a
+realistic HPC cluster environment. Job scheduling, node selection and process
+mapping are also simulated. This simulator is designed to be lightweight and
+fast to allow research and development based on trial and error. In addition
+to the simulator, we also design and develop a custom profiler to extract
 communication patterns from applications for use in conjunction with our
 proposed simulator.
 
@@ -101,6 +101,6 @@ simulator for dynamic and application-aware interconnects. Section
 \ref{proposal} describes the design and implementation of our presented
 simulator and profiler. Section \ref{evaluation} presents the simulation
 results for NAS CG benchmark and NERSC MILC benchmark obtained with our
-proposed simulator. Also, results of a verification experiment on a physical
-cluster is shown. Section \ref{related-work} reviews related work. Section
-\ref{conclusion} concludes this paper and outline our future work.
+proposed simulator. Furthermore, results of a verification experiment on a
+physical cluster is shown. Section \ref{related-work} reviews related work.
+Section \ref{conclusion} concludes this paper and outline our future work.
