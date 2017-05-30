@@ -50,19 +50,19 @@ aggregated online by the profiler:
 - Number of messages transferred from a process to another
 - Distribution of message sizes
 
+\begin{figure}[h]
+    \centering
+    \includegraphics{tracer_block}
+    \caption{Block Diagram of MPI Profiler}
+    \label{fig:profiler-block}
+\end{figure}
+
 Furthermore, MPI functions for creating and destroying communicators are also
 hooked to maintain a mapping between global ranks (rank number within
 `MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
 users). This mapping is necessary because PERUSE events are reported with
 local ranks, but profiling results should be described with global ranks for
 the easiness of analysis.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics{tracer_block}
-    \caption{Block Diagram of MPI Profiler}
-    \label{fig:profiler-block}
-\end{figure}
 
 The proposed profiler is provided as a form of a shared library, which can be
 integrated into applications at either link time or run time. The preferred
@@ -77,21 +77,21 @@ exchanged between processes. These visualizations clearly reveal the spatial
 locality and sparsity of communication between processes.
 Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
     \centering
     \includegraphics{traffic_matrix}
     \caption{Obtained Traffic Matrix}
     \label{fig:traffic-matrix}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
     \centering
     \includegraphics{message_matrix}
     \caption{Obtained Message Number Matrix}
     \label{fig:message-matrix}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
     \centering
     \includegraphics{message_size_histogram}
     \caption{Histogram of Message Size}
@@ -100,14 +100,16 @@ Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
 ## Interconnect Simulator
 
-\begin{figure}[htbp]
+The proposed simulator takes three types inputs.
+
+\begin{figure}[h]
     \centering
     \includegraphics{simulator_block}
     \caption{Block Diagram of Proposed Interconnect Simulator}
     \label{fig:simulator-block}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
     \centering
     \includegraphics{simulator_flowchart}
     \caption{Life Cycle of a Simulated Job}
