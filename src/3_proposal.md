@@ -1,6 +1,15 @@
 # Proposal
 
-Work in progress...
+<!-- 提案の概要 -->
+Our developed simulator takes a set of communication patterns of applications
+and a cluster configuration as its input and simulates the congestion on each
+link of the interconnect.
+
+<!-- トラフィックマトリクスを基にシミュレーションするよ -->
+In order to speedup the simulation, we assume that the amount of traffic
+between processes is constant during the execution of a job. Under this
+assumption, we use the traffic matrices of an application as its communication
+pattern.
 
 ## MPI Profiler
 
@@ -34,6 +43,30 @@ callback functions for each event that they are interested in. After that, the
 registered callback function is called each time when the associated event
 occurs.
 
+\begin{figure*}[t]
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{traffic_matrix}
+        \caption{Number of Total Bytes Transferred}
+        \label{fig:traffic-matrix}
+    \end{subfigure}
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{message_matrix}
+        \caption{Number of Messages Transferred}
+        \label{fig:message-matrix}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{.32\linewidth}
+        \centering
+        \includegraphics[scale=.8]{message_size_histogram}
+        \caption{Distribution of Message Size}
+        \label{fig:message-size-histogram}
+    \end{subfigure}
+    \caption{Profiler Output for NERSC MILC Benchmark}
+    \label{fig:profiler-output}
+\end{figure*}
+
 <!-- プロファイラの動作説明 -->
 Figure\ \ref{fig:profiler-block} shows how our profiler, MPI library and MPI
 application and interact with each other. The profiler hooks MPI_Init and
@@ -45,8 +78,7 @@ Profiling results are written out as a JSON file during the finalization.
 During the execution of application, three statistics shown below are
 aggregated online by the profiler:
 
-- Total number of bytes transferred from a process to another (_i.e._ traffic
-  matrix)
+- Total number of bytes transferred from a process to another
 - Number of messages transferred from a process to another
 - Distribution of message sizes
 
@@ -56,30 +88,6 @@ aggregated online by the profiler:
     \caption{Block Diagram of MPI Profiler}
     \label{fig:profiler-block}
 \end{figure}
-
-\begin{figure*}[t]
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{traffic_matrix}
-        \caption{Obtained Traffic Matrix}
-        \label{fig:traffic-matrix}
-    \end{subfigure}
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{message_matrix}
-        \caption{Obtained Message Number Matrix}
-        \label{fig:message-matrix}
-    \end{subfigure}
-    \centering
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{message_size_histogram}
-        \caption{Histogram of Message Size}
-        \label{fig:message-size-histogram}
-    \end{subfigure}
-    \caption{Profiler Output for NERSC MILC}
-    \label{fig:profiler-output}
-\end{figure*}
 
 Furthermore, MPI functions for creating and destroying communicators are also
 hooked to maintain a mapping between global ranks (rank number within
@@ -103,9 +111,29 @@ Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
 ## Interconnect Simulator
 
-The proposed simulator is based on a discrete-event simulation model.
-Fig.\ \ref{fig:simulator-flowchart}
-Fig.\ \ref{fig:simulator-block}
+Figure\ \ref{fig:simulator-block} shows the input and output for our
+simulator. The simulation scenario file defines various configures for a
+simulation run. This file defines the cluster configuration to use and set of
+jobs. Moreover, following algorithms are specified:
+
+- _Scheduling Algorithm_: Selects the job to execute from the job queue.
+- _Node Selection Algorithm_: Selects which computing nodes to assign for a
+  job.
+- _Process Placement Algorithm_: Determines on which computing node to place a
+  process.
+- _Routing Algorithm_: Computes a route between a pair of processes.
+
+Each configuration value can be a list values. In that case, the simulation is
+executed multiple times each with a different combination of configuration
+values until all combinations are exhausted.
+
+The cluster configuration file defines the topology of the interconnect,
+capacity of links and number of processing elements for each computing node.
+This file is described in GraphML\ [@Brandes2013], an XML-based markup
+language for graphs. Popular graph visualization tools such as
+Cytoscape\ [@Shannon2003] and Gephi\ [@Bastian2009] can be used to view and
+edit GraphML files. Communication pattern files are obtained from applications
+using our custom profiler.
 
 \begin{figure}[h]
     \centering
@@ -113,6 +141,14 @@ Fig.\ \ref{fig:simulator-block}
     \caption{Block Diagram of Proposed Interconnect Simulator}
     \label{fig:simulator-block}
 \end{figure}
+
+The proposed simulator is based on a discrete-event simulation model. The
+simulator maintains an event queue, which is a priority queue that contains a
+collection of events prioritized by its occurring time. During the main event
+loop, the simulator pops the earliest occurring event from the event queue.
+
+Figure\ \ref{fig:simulator-flowchart} shows the life cycle of a simulated job.
+First, a job is popped from the job queue.
 
 \begin{figure}[h]
     \centering
