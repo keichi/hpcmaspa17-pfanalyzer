@@ -69,21 +69,13 @@ interconnects and few researches have been done to simulate dynamic and
 application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
-In this paper, we design and develop a prototype of an interconnect simulator
-specialized for dynamic interconnects to facilitate the research and
-development of such interconnects. Our proposed simulator takes a set of
-communication patterns of applications and a cluster configuration as its
-input and simulates the congestion on each link of the interconnect. To allow
-the simulation of dynamic and application-aware interconnects, the routing
-module of the simulator accepts communication patterns as its input and
-dynamically makes routing decision based on the pattern. Furthermore, the
-simulator is capable of concurrently running multiple jobs to reproduce a
-realistic HPC cluster environment. Job scheduling, node selection and process
-mapping are also simulated. This simulator is designed to be lightweight and
-fast to allow research and development based on trial and error. In addition
-to the simulator, we also design and develop a custom profiler to extract
-communication patterns from applications for use in conjunction with our
-proposed simulator.
+This paper proposes a prototype of an interconnect simulator specialized for
+dynamic interconnects to facilitate the research and development of such
+interconnects. Our developed simulator takes a set of communication patterns
+of applications and a cluster configuration as its input and simulates the
+congestion on each link of the interconnect. In addition to the simulator, we
+also design and develop a custom profiler to extract communication patterns
+from applications for use in conjunction with our proposed simulator.
 
 <!-- この論文の貢献 -->
 The contributions of this paper are summarized as follows:
@@ -95,12 +87,12 @@ The contributions of this paper are summarized as follows:
   fat-tree interconnect
 
 <!-- アウトライン -->
-The rest of this paper is organized as follows. Section
-\ref{research-objective} examines the requirements of an interconnect
-simulator for dynamic and application-aware interconnects. Section
-\ref{proposal} describes the design and implementation of our presented
-simulator and profiler. Section \ref{evaluation} presents the simulation
-results for NAS CG benchmark and NERSC MILC benchmark obtained with our
-proposed simulator. Furthermore, results of a verification experiment on a
-physical cluster is shown. Section \ref{related-work} reviews related work.
-Section \ref{conclusion} concludes this paper and outline our future work.
+The rest of this paper is organized as follows.
+Section\ \ref{research-objective} examines the requirements of an interconnect
+simulator for dynamic and application-aware interconnects.
+Section\ \ref{proposal} describes the design and implementation of our
+presented simulator and profiler. Section\ \ref{evaluation} presents the
+simulation results for NAS CG benchmark and NERSC MILC benchmark obtained with
+our proposed simulator. Furthermore, results of a verification experiment on a
+physical cluster is shown. Section\ \ref{related-work} reviews related work.
+Section\ \ref{conclusion} concludes this paper and outline our future work.
