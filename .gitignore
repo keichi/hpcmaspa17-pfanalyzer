@@ -323,3 +323,4 @@ ENV/
 src/*.tex
 !src/main.tex
 main.pdf
+img/*.pdf
