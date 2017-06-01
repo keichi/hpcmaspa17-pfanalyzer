@@ -1,8 +1,23 @@
 # Evaluation
 
-## Evaluation Environment
+## Profiling Overhead
 
-## Overhead of Tracer
+We compared the performance of point-to-point communication between
+two processes with and without our profiler to investigate the overhead
+incurred by the profiler. OSU Micro Benchmark\ [@omb] was used to measure the
+bandwidth and latency of point-to-point communication between two processes
+for varying message sizes. Figure\ \ref{fig:bandwidth-overhead} shows the
+comparison of bandwidth. For messages larger than 1KB, the overhead is almost
+ignorable. For messages smaller than 1KB, up to 30% of overhead is incurred.
+Benchmark results of latency is shown in Fig.\ \ref{fig:latency-overhead}.
+There is almost no overhead for latency.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{bandwidth_overhead}
+    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
+    \label{fig:bandwidth-overhead}
+\end{figure}
 
 \begin{figure}[htbp]
     \centering
