@@ -26,14 +26,28 @@ There is almost no overhead for latency.
     \label{fig:latency-overhead}
 \end{figure}
 
+## Simulation Results
+
+The simulated cluster is based on a physical cluster installed at our
+institution. It is composed of 20 computing nodes each equipped with 8 cores.
+Computing nodes are interconnected with a fat-tree topology as illustrated in
+Fig.\ \ref{fig:cluster-config}.
+
 \begin{figure}[htbp]
     \centering
-    \includegraphics{bandwidth_overhead}
-    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
-    \label{fig:bandwidth-overhead}
+    \includegraphics{cluster_config}
+    \caption{Simulated Cluster}
+    \label{fig:cluster-config}
 \end{figure}
 
-## Congestion in the Interconnect
+Two types of communication-intensive applications are used. The first one
+is the CG benchmark from the NAS Parallel Benchmark Suite\ [@Bailey1991]. The
+CG benchmark estimates the largest eigenvalue of a sparse matrix using the
+inverse power method. Internally conjugate gradient method is used, which is
+also commonly used in irregular mesh applications. The second one is MIMD
+Lattice Computation (MILC), an application used to study Quantum
+Chromodynamics (QCD). We used the input dataset provided by NERSC. Both
+applications were executed without thread parallelism (_i.e._ flat MPI model).
 
 \begin{figure}[htbp]
     \begin{subfigure}[t]{.47\linewidth}
