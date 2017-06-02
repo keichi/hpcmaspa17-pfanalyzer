@@ -47,22 +47,23 @@ inverse power method. Internally conjugate gradient method is used, which is
 also commonly used in irregular mesh applications. The second one is MIMD
 Lattice Computation (MILC)\ [@milc], an application used to study Quantum
 Chromodynamics (QCD). We used the input dataset provided by NERSC. Both
-applications were executed without thread parallelism (_i.e._ flat MPI model).
+applications were executed with 128 MPI processes and without thread
+parallelism (_i.e._ flat MPI model).
 
 - _Scheduling_: First-Come First-Served (FCFS) scheduling is performed.
-- _Node Selection_: Assumes nodes are lined up in a one-dimensional array and
-  minimizes fragmentation. Essentially the same as Slurm's default node
+- _Node Selection_: Assumes that nodes are lined up in a one-dimensional array
+  and minimizes fragmentation. Essentially the same as Slurm's default node
   selection algorithm.
 - _Process Placement_: Processes are linearly mapped to computing nodes.
 - _Routing_: Two routing algorithms are compared. The first one is
-  Destionation-mod-K routing, one of the popular static load balancing
+  \mbox{Destionation-mod-K} routing, one of the popular static load balancing
   routing algorithms that only uses the destination address for load
   balancing. The second one is a greedy dynamic routing algorithm where routes
   are computed from the heaviest communicating process pair so as to balance
   the congestion of each link.
 
 Using these configurations as input data, we measured the maximum congestion
-on links and compared them for D-mod-K routing and dynamic routing.
+on links and compared them for \mbox{D-mod-K} routing and dynamic routing.
 Figure\ \ref{fig:nas-cg-congestion}
 Figure\ \ref{fig:nersc-milc-congestion}
 
@@ -80,7 +81,7 @@ Figure\ \ref{fig:nersc-milc-congestion}
         \label{fig:nersc-milc-congestion}
     \end{subfigure}
     \caption{Comparison of Maximum Congestion}
-    \label{fig:profiler-output}
+    \label{fig:singe-job-congestion}
 \end{figure}
 
 ## Benchmark Results
@@ -103,5 +104,19 @@ section \ref{simulation-results}.
         \label{fig:nersc-milc-time}
         \end{subfigure}
     \caption{Comparison of Excution TIme}
-    \label{fig:profiler-output}
+    \label{fig:single-job-time}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{nas_cg_multi_congestion}
+    \caption{NAS CG Benchmark}
+    \label{fig:nas-cg-congestion}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{nersc_milc_multi_congestion}
+    \caption{NERSC MILC Benchmark}
+    \label{fig:nersc-milc-congestion}
 \end{figure}
