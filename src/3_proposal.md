@@ -1,17 +1,20 @@
 # Proposal
 
 <!-- 提案の概要 -->
-We propose an interconnect simulator capable of simulating application-ware
-dynamic routing. In order to speedup the simulation, we assume that the amount
-of traffic between processes is constant during the execution of a job. Under
-this assumption, we use the traffic matrix of an application as its
-communication pattern.
+We propose an interconnect simulator capable of simulating application-aware
+dynamic routing. In this section, we first describe our profiler to extract
+communication patterns from applications. Subsequently, the design and
+implementation of our simulator is presented.
 
 ## MPI Profiler
 
 <!-- 何が既存のプロファイラと違うのか? なんでプロファイラを新規開発する? -->
-To collect the traffic matrices from MPI applications, we developed an
-MPI profiler.
+In order to speedup the simulation, we assume that the amount
+of traffic between processes is constant during the execution of a job. Under
+this assumption, we use the traffic matrix of an application as its
+communication pattern. To collect the traffic matrices from MPI applications,
+we developed an MPI profiler.
+
 Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
 Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI
 functions provided by MPI libraries with instrumented ones by using the MPI
@@ -27,15 +30,14 @@ obtained when profiling an application that uses collective communication
 functions.
 
 <!-- PERUSEの紹介 -->
-To solve this problem and accurately capture underlying point-to-point
-communication of collective communication, we utilize the MPI Performance
-Examination and Revealing Unexposed State Extension (PERUSE)\ [@Jones2006].
-PERUSE was designed to provide internal information of the MPI implementation
-that were not exposed through PMPI to applications and performance analysis
-tools. By using PERUSE, application or performance analysis tools register
-callback functions for each event that they are interested in. After that, the
-registered callback function is called each time when the associated event
-occurs.
+To accurately capture underlying point-to-point communication of collective
+communication, we utilize the MPI Performance Examination and Revealing
+Unexposed State Extension (PERUSE)\ [@Jones2006]. PERUSE was designed to
+provide internal information of the MPI implementation that were not exposed
+through PMPI to applications and performance analysis tools. By using PERUSE,
+application or performance analysis tools register callback functions for each
+event that they are interested in. After that, the registered callback
+function is called each time when the associated event occurs.
 
 \begin{figure*}[t]
     \begin{subfigure}[b]{.32\linewidth}
@@ -62,8 +64,8 @@ occurs.
 \end{figure*}
 
 <!-- プロファイラの動作説明 (PERUSE関係)-->
-Figure\ \ref{fig:profiler-block} illustrates how our profiler, MPI library and MPI
-application and interact with each other. The profiler hooks MPI_Init and
+Figure\ \ref{fig:profiler-block} illustrates how our profiler, MPI library and
+MPI application and interact with each other. The profiler hooks MPI_Init and
 MPI_Finalize to perform initialization and finalization. During the
 initialization, the profiler subscribes to two PERUSE events:
 `PERUSE_COMM_REQ_XFER_BEGIN` and `PERUSE_COMM_REQ_XFER_END`. These events are
@@ -99,11 +101,12 @@ relinking of the application. The `LD_PRELOAD` environment variable is used to
 load the shared library before the execution of application.
 
 <!-- プロファイラの出力例 -->
-Figure\ \ref{fig:traffic-matrix} is a visualization of the traffic matrix
-obtained from running the NERSC MILC benchmark with 256 processes.
-Figure\ \ref{fig:message-matrix} is a visualization of number of messages
-exchanged between processes. These visualizations clearly reveal the spatial
-locality and sparsity of communication between processes.
+As an example of a profiler output, results obtained from running the NERSC
+MILC benchmark with 128 processes is shown in Fig.\ \ref{fig:profiler-output}.
+Figure\ \ref{fig:traffic-matrix} and Figure\ \ref{fig:message-matrix} are
+visualizations of total bytes and number of messages exchanged between
+processes, respectively. These visualizations clearly reveal the spatial
+locality and sparsity of the communication pattern.
 Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
 ## Interconnect Simulator
@@ -111,26 +114,25 @@ Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 <!-- 提案の概要 -->
 Our developed simulator takes a set of communication patterns of applications
 and a cluster configuration as its input and simulates the congestion on each
-link of the interconnect.
+link of the interconnect. We are specifically interested in congestion because
+the maximum congestion in the interconnect indicates the lower bound on the
+time needed for communication [@Hoefler2011].
 
 <!-- シミュレータの入力 (シナリオ)-->
-Figure\ \ref{fig:simulator-block} shows the detailed input and output for our
+Figure\ \ref{fig:simulator-block} shows the input and output for our
 simulator. The simulation scenario file defines various configures for a
 simulation run. This file defines the cluster configuration to use and set of
-jobs. Moreover, following algorithms are specified:
+jobs. Moreover, algorithms that control the execution and communication of
+jobs as shown in Table\ \ref{tbl:simulator-algorithm} are specified. The
+cluster configuration file defines the topology of the interconnect, capacity
+of links and number of processing elements for each computing node. This file
+is described in GraphML\ [@Brandes2013], an XML-based markup language for
+graphs. Popular graph visualization tools such as Cytoscape\ [@Shannon2003]
+and Gephi\ [@Bastian2009] can be used to view and edit GraphML files.
+Communication pattern files are obtained from applications using our custom
+profiler.
 
-- _Scheduling_: Selects the job to execute from the job queue.
-- _Node Selection_: Selects which computing nodes to assign for a
-  job.
-- _Process Placement_: Determines on which computing node to place a
-  process.
-- _Routing_: Computes a route between a pair of processes.
-
-Each configuration value can be a list values. In that case, the simulation is
-executed multiple times each with a different combination of configuration
-values until all combinations are exhausted.
-
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics{simulator_block}
     \caption{Block Diagram of Proposed Interconnect Simulator}
@@ -138,42 +140,64 @@ values until all combinations are exhausted.
 \end{figure}
 
 <!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
-The cluster configuration file defines the topology of the interconnect,
-capacity of links and number of processing elements for each computing node.
-This file is described in GraphML\ [@Brandes2013], an XML-based markup
-language for graphs. Popular graph visualization tools such as
-Cytoscape\ [@Shannon2003] and Gephi\ [@Bastian2009] can be used to view and
-edit GraphML files. Communication pattern files are obtained from applications
-using our custom profiler.
+Each configuration value can be a list values. In that case, the simulation is
+executed multiple times each with a different combination of configuration
+values until all combinations are exhausted.
+
+\begin{table}[htbp]
+    \centering
+    \normalsize
+    \caption{List of Configurable Algorithms}
+    \label{tbl:simulator-algorithm}
+    \begin{tabularx}{.9\linewidth}{lX}
+        \hline
+        Algorithm         & Description                                            \\
+        \hline \hline
+        Job Scheduling    & Selects the job to execute from the job queue.         \\ \hline
+        Node Selection    & Selects which computing nodes to assign for a job.     \\ \hline
+        Process Placement & Determines on which computing node to place a process. \\ \hline
+        Routing           & Computes a route between a pair of processes.          \\ \hline
+    \end{tabularx}
+\end{table}
+
+\newpage
 
 <!-- シミュレータの出力 -->
+The simulator can create a snapshot of the congestion in the interconnect
+at an arbitrary time and output is as a GraphML file. By visualizing the
+acquired GraphML using the aforementioned graph visualization tools, users can
+intuitively locate bottleneck links and load imbalance. Furthermore, the
+congestion values can be summarized into statistics value such as maximum,
+minimum, average, variance and plotted.
 
 <!-- シミュレータの動作原理 -->
 The proposed simulator is based on a discrete-event simulation model. Under
 this model, the simulator maintains an event queue, which is a priority queue
 that contains a collection of future events ordered by its occurring time. At
-the beginning of the main simulation loop, the earliest occurring event is
+the beginning of the main loop, the earliest occurring event is
 popped from the event queue. Then, based on the type of the event, the
 corresponding event handler is called. An event handler may schedule new
 events. This loop is repeated until the event queue is empty.
 
 <!-- ジョブの視点で見たシミュレーション処理の流れ -->
-Figure\ \ref{fig:simulator-flowchart} shows the life cycle of a simulated job.
-Generated jobs are first enqueued to the job queue. The scheduling algorithms
-determines the job to be executed next and pops it from the job queue. Then,
-the node selection algorithms picks a set of computing nodes that can
-satisfy the requested number of processes by the job. In the next step,
-the process placement algorithm determines on which computing node to run each
-process of the job. After the process placement is completed, the routing
-algorithm computes and allocates routes for all communicating pair of
-processes. Since we would like to allow users to implement application-aware
-dynamic routings, various information are passed on to the routing algorithm
-in addition to the source/destination processes. The information includes
-process mapping, communication pattern and interconnect usage. For each
-allocated route, the congestion of links contained in the route is increased.
-After all routes are computed, the simulator waits until the job has finished.
-Congestion for each links that were utilized by the job is decreased. Finally,
-computing nodes are deallocated and job is marked as completed.
+Figure\ \ref{fig:simulator-flowchart} illustrates the life cycle of a
+simulated job. When a jobs is generated, it is initially enqueued to the job
+queue. As soon as there are enough number of unallocated computing nodes to
+execute a job, the scheduling algorithms determines the job to be executed
+next and pops it from the job queue. Subsequently, the node selection
+algorithms picks a set of computing nodes that can satisfy the requested
+number of processes by the job. Then, the process placement algorithm
+determines on which computing node to run each process of the job. After the
+process placement is completed, the routing algorithm computes and allocates
+routes for all communicating pair of processes. Since we would like to allow
+users to implement application-aware dynamic routings, various information are
+supplied to the routing algorithm in addition to the source/destination
+process pair. The information includes process placement, communication
+pattern and interconnect usage. For each allocated route, the traffic on the
+link contained in the route is increased. After all routes are computed, the
+simulator waits until the job has finished. Then, the congestion for each link
+that was utilized by the job is decreased. Finally, computing nodes are
+deallocated and the job is marked as completed.
 
 \begin{figure}[h]
     \centering

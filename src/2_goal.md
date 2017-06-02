@@ -1,9 +1,10 @@
 # Research Objective
 
-In this paper, we design and develop a prototype of an interconnect simulator
-specialized for dynamic interconnects to facilitate the research and
-development of such interconnects. Here are the list of requirements that must
-be met:
+In this paper, we aim to realize an  interconnect simulator specialized for
+dynamic interconnects to facilitate the research and development of such
+interconnects. One of the main goal is to allow users to perform a systematic
+investigation of diverse interconnect with different topologies and
+parameters. Furthermore, following requirements must be bet by the simulator:
 
 - _Application-aware dynamic routing_: To develop and analyze methods to
   control dynamic interconnects in an application-aware manner, dynamic
@@ -17,8 +18,8 @@ be met:
 - _Parallel job execution_: The simulator should allow concurrently running
   multiple jobs to reproduce a realistic HPC cluster environment. This implies
   that job scheduling, node selection and process mapping should also be
-  simulated.
+  simulated since these affect.
 - _Lightweight and fast simulation_: The simulator should be designed to be
-  lightweight and fast to allow research and development based on trial and
-  error. If necessary, appropriate approximation should be introduced to
-  improve simulation performance.
+  lightweight and fast to carry out large number of simulations with different
+  parameters in a reasonable amount of time. If necessary, appropriate
+  approximation should be introduced to improve simulation performance.
