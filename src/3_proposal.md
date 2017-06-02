@@ -164,7 +164,7 @@ values until all combinations are exhausted.
 
 <!-- シミュレータの出力 -->
 The simulator can create a snapshot of the congestion in the interconnect
-at an arbitrary time and output is as a GraphML file. By visualizing the
+at arbitrary time and output is as a GraphML file. By visualizing the
 acquired GraphML using the aforementioned graph visualization tools, users can
 intuitively locate bottleneck links and load imbalance. Furthermore, the
 congestion values can be summarized into statistics value such as maximum,

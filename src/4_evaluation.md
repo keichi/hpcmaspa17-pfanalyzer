@@ -1,10 +1,10 @@
 # Evaluation
 
-In this section, we first evaluate the overhead incurred by our profiler.
-Subsequently, we compare the usage of interconnect when using static control
-or dynamic control using our simulator. The simulation is then verified using
-benchmark results
-obtained from a physical cluster.
+In this section, we first assess the overhead incurred by our profiler.
+Subsequently, we simulate the load of a fat-tree interconnect when using
+static interconnect control and dynamic interconnect control The obtained
+simulation results are then verified using benchmark results obtained from a
+physical cluster.
 
 ## Profiling Overhead
 
@@ -35,12 +35,31 @@ latency.
 
 ## Simulation Results
 
-In this experiment, two communication-intensive MPI applications are
-simulated. Maximum congestion is compared for static interconnect and dynamic
-interconnect control. The simulated cluster is modeled after a physical
-cluster installed at our institution. It is composed of 20 computing nodes
-each equipped with 8 cores. Computing nodes are interconnected with a fat-tree
-topology as illustrated in Fig.\ \ref{fig:cluster-config}.
+In this experiment, two communication-intensive MPI applications are executed
+on our simulator. The simulated maximum congestion in the interconnect is
+compared for static interconnect control and dynamic interconnect control. The
+simulated cluster is modeled after a physical cluster installed at our
+institution. It is composed of 20 computing nodes each equipped with 8 cores.
+Computing nodes are interconnected with a fat-tree topology as illustrated in
+Fig.\ \ref{fig:cluster-config}. Scheduling, node selection, process placement
+and routing algorithms are configured as follows:
+
+- _Scheduling_: A simple First-Come First-Served (FCFS) scheduling without
+  backfilling is performed.
+- _Node Selection_: Assumes that nodes are lined up in a one-dimensional array
+  and minimizes fragmentation. This is essentially the same as Slurm's default
+  node selection policy.
+- _Process Placement_: Block process placement ($i$-th host accommodates
+  rank $ci$ to rank $c(i+1)-1$ where $c$ represents the number of cores on
+  each host) is adopted.
+- _Routing_: Two routing algorithms are compared. The first one is
+  \mbox{Destionation-modulo-K} (\mbox{D-mod-K}) routing, a popular
+  static load balancing routing algorithm that only solely the destination
+  address for load balancing. The second one is a greedy dynamic routing
+  algorithm where routes are computed and allocated from the heaviest
+  communicating process pair. A route is computed so as to minimize the weight
+  of the maximum-weight link in the path. Here, the weight of a link is
+  considered to be congestion.
 
 \begin{figure}[htbp]
     \centering
@@ -56,27 +75,13 @@ inverse power method. Internally it uses the conjugate gradient method, which
 appears frequently in irregular mesh applications. The second one is an
 application (`ks_imp_dyn`) from MIMD Lattice Computation (MILC)\ [@milc],
 a collection of applications used to study Quantum Chromodynamics (QCD). We
-used the input dataset provided by NERSC. Both applications were executed with
-128 MPI processes. Thread parallelism was not put in use (_i.e._ flat MPI
-model was adopted).
+used the input dataset provided by NERSC as a part of the NERSC MILC
+benchmark. Both applications were executed with 128 MPI processes. Thread
+parallelism was not put in use (_i.e._ flat MPI model was adopted).
 
-- _Scheduling_: A simple First-Come First-Served (FCFS) scheduling without
-  backfilling is performed.
-- _Node Selection_: Assumes that nodes are lined up in a one-dimensional array
-  and minimizes fragmentation. Essentially the same as Slurm's default node
-  selection algorithm.
-- _Process Placement_: Processes are linearly mapped to computing nodes.
-- _Routing_: Two routing algorithms are compared. The first one is
-  \mbox{Destionation-modulo-K} (\mbox{D-mod-K}) routing, one of the popular
-  static load balancing routing algorithms that only uses the destination
-  address for load balancing. The second one is a greedy dynamic routing
-  algorithm where routes are computed from the heaviest communicating process
-  pair so as to balance the congestion of each link.
-
-Using these configurations as input data, we measured the maximum congestion
-on links and compared them for \mbox{D-mod-K} routing and dynamic routing.
-Figure\ \ref{fig:nas-cg-congestion} indicates the 50%.
-Figure\ \ref{fig:nersc-milc-congestion} the 18%
+Under this condition, we measured the maximum congestion on links and compared
+them for \mbox{D-mod-K} routing and dynamic routing.
+Figure\ \ref{fig:nas-cg-congestion}: 50%. Figure\ \ref{fig:nersc-milc-congestion}: 18%
 
 \begin{figure}[htbp]
     \begin{subfigure}[t]{.47\linewidth}
@@ -117,3 +122,18 @@ measured the execution time of each benchmark.
     \caption{Comparison of Excution TIme}
     \label{fig:single-job-time}
 \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{nas_cg_multi_congestion}
+    \caption{Simulated Cluster}
+    \label{fig:nas-cg-multi-congestion}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{nersc_milc_multi_congestion}
+    \caption{Simulated Cluster}
+    \label{fig:nersc-milc-multi-congestion}
+\end{figure}
+
