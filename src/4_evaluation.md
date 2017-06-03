@@ -1,37 +1,10 @@
 # Evaluation
 
-In this section, we first assess the overhead incurred by our profiler.
-Subsequently, we simulate the load of a fat-tree interconnect when using
-static interconnect control and dynamic interconnect control The obtained
-simulation results are then verified using benchmark results obtained from a
-physical cluster.
-
-## Profiling Overhead
-
-We compared the performance of point-to-point communication between
-two processes with and without our profiler to investigate the overhead
-incurred by the profiler. OSU Micro Benchmark\ [@omb] was used to measure the
-bandwidth and latency of point-to-point communication between two processes
-for varying message sizes. The comparison of bandwidth is shown in
-Fig.\ \ref{fig:bandwidth-overhead}. For messages larger than 1KB, the overhead
-is ignorable. For messages smaller than 1KB, up to 30% of overhead is
-incurred. Benchmark results for latency as shown in
-Fig.\ \ref{fig:latency-overhead} suggests that there is almost no overhead for
-latency.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics{bandwidth_overhead}
-    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
-    \label{fig:bandwidth-overhead}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics{latency_overhead}
-    \caption{Latency of MPI\_Send/Recv between two nodes}
-    \label{fig:latency-overhead}
-\end{figure}
+In this section, we first simulate the load of a fat-tree interconnect when
+using static interconnect control and dynamic interconnect control. The
+obtained simulation results are then verified using benchmark results obtained
+from a physical cluster. Lastly, we assess the overhead incurred by our
+profiler.
 
 ## Simulation Results
 
@@ -137,3 +110,29 @@ measured the execution time of each benchmark.
     \label{fig:nersc-milc-multi-congestion}
 \end{figure}
 
+## Profiling Overhead
+
+We compared the performance of point-to-point communication between
+two processes with and without our profiler to investigate the overhead
+incurred by the profiler. OSU Micro Benchmark\ [@omb] was used to measure the
+bandwidth and latency of point-to-point communication between two processes
+for varying message sizes. The comparison of bandwidth is shown in
+Fig.\ \ref{fig:bandwidth-overhead}. For messages larger than 1KB, the overhead
+is ignorable. For messages smaller than 1KB, up to 30% of overhead is
+incurred. Benchmark results for latency as shown in
+Fig.\ \ref{fig:latency-overhead} suggests that there is almost no overhead for
+latency.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{bandwidth_overhead}
+    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
+    \label{fig:bandwidth-overhead}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{latency_overhead}
+    \caption{Latency of MPI\_Send/Recv between two nodes}
+    \label{fig:latency-overhead}
+\end{figure}
