@@ -29,15 +29,12 @@ communication. As a result, only a subset of the communication pattern is
 obtained when profiling an application that uses collective communication
 functions.
 
-<!-- PERUSEの紹介 -->
-To accurately capture underlying point-to-point communication of collective
-communication, we utilize the MPI Performance Examination and Revealing
-Unexposed State Extension (PERUSE)\ [@Jones2006]. PERUSE was designed to
-provide internal information of the MPI implementation that were not exposed
-through PMPI to applications and performance analysis tools. By using PERUSE,
-application or performance analysis tools register callback functions for each
-event that they are interested in. After that, the registered callback
-function is called each time when the associated event occurs.
+\begin{figure}[h]
+    \centering
+    \includegraphics{tracer_block}
+    \caption{Block Diagram of MPI Profiler}
+    \label{fig:profiler-block}
+\end{figure}
 
 \begin{figure*}[t]
     \begin{subfigure}[b]{.32\linewidth}
@@ -63,6 +60,16 @@ function is called each time when the associated event occurs.
     \label{fig:profiler-output}
 \end{figure*}
 
+<!-- PERUSEの紹介 -->
+To accurately capture underlying point-to-point communication of collective
+communication, we utilize the MPI Performance Examination and Revealing
+Unexposed State Extension (PERUSE)\ [@Jones2006]. PERUSE was designed to
+provide internal information of the MPI implementation that were not exposed
+through PMPI to applications and performance analysis tools. By using PERUSE,
+application or performance analysis tools register callback functions for each
+event that they are interested in. After that, the registered callback
+function is called each time when the associated event occurs.
+
 <!-- プロファイラの動作説明 (PERUSE関係)-->
 Figure\ \ref{fig:profiler-block} illustrates how our profiler, MPI library and
 MPI application and interact with each other. The profiler hooks MPI_Init and
@@ -77,13 +84,6 @@ aggregated online by the profiler:
 - Total number of bytes transferred from a process to another
 - Number of messages transferred from a process to another
 - Distribution of message sizes
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{tracer_block}
-    \caption{Block Diagram of MPI Profiler}
-    \label{fig:profiler-block}
-\end{figure}
 
 <!-- プロファイラの動作説明 (コミュニケータ関係) -->
 Furthermore, MPI functions for creating and destroying communicators are also
@@ -159,8 +159,6 @@ values until all combinations are exhausted.
         Routing           & Computes a route between a pair of processes.          \\ \hline
     \end{tabularx}
 \end{table}
-
-\newpage
 
 <!-- シミュレータの出力 -->
 The simulator can create a snapshot of the congestion in the interconnect
