@@ -11,23 +11,27 @@ implementation of our simulator is presented.
 <!-- 何が既存のプロファイラと違うのか? なんでプロファイラを新規開発する? -->
 In order to simplify and speed up the simulation, we assume that the amount of
 traffic between processes is constant during the execution of a job. Under
-this assumption, we use the traffic matrix of an application as its
-communication pattern. To collect the traffic matrices from MPI applications,
-we developed an MPI profiler.
+this assumption, we use the traffic matrix (for an application composed of
+$n$ processes, a traffic matrix is defined as a $n \times n$ square matrix $T$
+of which element $T_{ij}$ is equal to the amount of traffic sent from rank
+$i$ to rank $j$) of an application as its communication pattern.
 
-Existing MPI performance analysis tools such as \mbox{Score-P}\ [@Knupfer2012],
-Vampir\ [@Knupfer2008] and Tau\ [@Shende2006] replace the standard MPI
-functions provided by MPI libraries with instrumented ones by using the MPI
-Profiling Interface\ (PMPI). Since this approach hooks the calls to MPI
-functions, it is unable to capture information on the internals of MPI
-implementations. This can be problematic when profiling MPI collective
-communication functions (_e.g._ MPI_Bcast, MPI_Allreduce and MPI_Reduce). In
-general, collective communication functions are implemented as a combination
-of multiple point-to-point communication. However, MPI profilers based on the
-PMPI interface cannot capture the occurrence of such underlying point-to-point
-communication. As a result, only a subset of the communication pattern is
-obtained when profiling an application that uses collective communication
-functions.
+Initially, we tried to reuse existing MPI performance analysis tools such as
+\mbox{Score-P}\ [@Knupfer2012], Vampir\ [@Knupfer2008] and Tau\ [@Shende2006]
+to collect the traffic matrices from MPI applications. However, these tools
+capture only a subset of the communication pattern when profiling an
+application that uses collective communication functions (_e.g._ MPI_Bcast,
+MPI_Allreduce and MPI_Reduce).
+
+The reason is as follows. Existing MPI profilers replace the standard MPI
+functions provided by MPI libraries with instrumented functions by utilizing
+the MPI Profiling Interface (PMPI). An advantage of this approach is that it
+work regardless of a specific MPI implementation. However, it fails to capture
+the internal information of the MPI library. Meanwhile, collective
+communication functions are internally implemented as a combination of
+point-to-point communication in MPI implementations. These underlying
+point-to-point communication are hidden from PMPI-based profilers and excluded
+from the communication patterns emitted by profilers.
 
 \begin{figure}[h]
     \centering
@@ -61,14 +65,14 @@ functions.
 \end{figure*}
 
 <!-- PERUSEの紹介 -->
-To accurately capture underlying point-to-point communication of collective
-communication, we utilize the MPI Performance Examination and Revealing
-Unexposed State Extension (PERUSE)\ [@Jones2006]. PERUSE was designed to
-provide internal information of the MPI implementation that were not exposed
-through PMPI to applications and performance analysis tools. By using PERUSE,
-application or performance analysis tools register callback functions for each
-event that they are interested in. After that, the registered callback
-function is called each time when the associated event occurs.
+To accurately capture the underlying point-to-point communication of collective
+communication, we develop a profiler by utilizing the MPI Performance
+Examination and Revealing Unexposed State Extension (PERUSE)\ [@Jones2006].
+PERUSE was designed to provide internal information of the MPI implementation
+that were not exposed through PMPI to applications and performance analysis
+tools. By using PERUSE, application or performance analysis tools register
+callback functions for each event of interest. After that, the registered
+callback function is called each time when the associated event occurs.
 
 <!-- プロファイラの動作説明 (PERUSE関係)-->
 Figure\ \ref{fig:profiler-block} illustrates how our profiler, MPI library and
@@ -86,19 +90,20 @@ aggregated online by the profiler:
 - Distribution of message sizes
 
 <!-- プロファイラの動作説明 (コミュニケータ関係) -->
-Furthermore, MPI functions for creating and destroying communicators are also
-hooked to maintain a mapping between global ranks (rank number within
-`MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
-users). This mapping is necessary because PERUSE events are reported with
-local ranks, while profiling results should be described with global ranks for
-the easiness of analysis.
+Furthermore, the profiler hooks several MPI functions for creating and
+destroying communicators to maintain a mapping between global ranks (rank
+number within `MPI_COMM_WORLD`) and local ranks (rank number within
+communicators created by users). This mapping is necessary because PERUSE
+events are reported with local ranks, while profiling results should be
+described with global ranks for the easiness of analysis.
 
 <!-- プロファイラの使い方 -->
 The proposed profiler is provided as a form of a shared library, which can be
-integrated into applications at either link time or run time. The preferred
-way is to use run time integration, as it does not require recompilation nor
-relinking of the application. The `LD_PRELOAD` environment variable is used to
-load the shared library before the execution of application.
+integrated into applications either when building the application or running
+the application. The preferred way is to use run time integration, as it does
+not require recompilation nor relinking of the application. The `LD_PRELOAD`
+environment variable is used to load the shared library before the execution
+of application.
 
 <!-- プロファイラの出力例 -->
 As an example of a profiler output, results obtained from running the NERSC

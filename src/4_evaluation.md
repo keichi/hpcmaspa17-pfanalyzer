@@ -37,7 +37,7 @@ and routing algorithms are configured as follows:
 \begin{figure}[htbp]
     \centering
     \includegraphics{cluster_config}
-    \caption{Simulated Cluster}
+    \caption{Simulated Cluster with Fat-Tree Interconnect}
     \label{fig:cluster-config}
 \end{figure}
 

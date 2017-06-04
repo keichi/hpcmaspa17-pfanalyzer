@@ -3,24 +3,33 @@
 <!-- 通信性能の重要性 -->
 Inter-node communication performance of High Performance Computing (HPC)
 clusters heavily affects the total performance of communication-intensive
-applications. In communication-intensive applications, low-latency and
-high-bandwidth communication between computing nodes is essential to fully
-exploit the computational power and parallelism of the computing nodes.
-High performance networks that provide such fast communication between
-computing nodes of a cluster are often referred to as _interconnects_. Message
-Passing Interface (MPI)\ [@MessagePassingInterfaceForum2015; @Gropp2014] is a
-commonly used inter-process communication library to describe communication on
-HPC clusters.
+applications. Communication-intensive applications require low-latency and
+high-bandwidth communication between computing nodes to fully exploit the
+computational power and parallelism of the computing nodes. High performance
+networks that provide such low-latency and high-bandwidth communication
+between computing nodes of a cluster are often referred to as _interconnects_.
+Message Passing Interface (MPI)\ [@MessagePassingInterfaceForum2015;
+@Gropp2014] is a commonly used inter-process communication library to describe
+communication on HPC clusters.
+
+<!-- 静的相互結合網と動的相互結合網の定義 -->
+In this paper, interconnects are roughly classified into _static interconnects_
+and _dynamic interconnects_. In static interconnects, packets flow is
+controlled solely based on its source and/or destination. A well-known
+exemplifier is InfiniBand\ [@InfiniBand2015], where forwarding tables of
+switches are populated with pre-computed forwarding rules in advance of the
+execution of applications. In contrast, packets flow in dynamic interconnect
+is controlled depending on various conditions such as the communication
+pattern of applications and utilization of interconnect.
 
 <!-- 現在の相互結合網のトレンド (静的、それ故の過剰投資) -->
-Nowadays, majority of HPC clusters employ statically controlled interconnects.
-A well-known exemplifier is InfiniBand\ [@InfiniBand2015], where forwarding
-tables of switches are populated with pre-computed forwarding rules in advance
-of the execution of applications. Since static interconnects are controlled
-without taking the communication patterns of individual applications into
-account, they are usually designed on an over-provisioning basis to achieve
-good performance for a variety of applications each with different
-communication pattern.
+Nowadays, the majority of HPC clusters employ static interconnects because of
+the low implementation cost. Since static interconnects are controlled without
+taking the communication patterns of individual applications into account,
+they are usually designed to be able to accommodate  worst-case traffic demand
+to achieve good performance for a variety of applications each with a
+different communication pattern. Interconnect designers have put great
+emphasis on properties such as full bisection bandwidth and nonblockingness.
 
 <!-- 相互結合網の大規模・複雑化と静的な相互結合網の限界 -->
 The continuously growing demand for computing power from academia and industry
@@ -64,7 +73,7 @@ difficult or impossible to acquire on physical clusters.
 
 <!-- 現在の相互結合網シミュレータの状況 -->
 In fact, a wide spectrum of interconnect simulators\ [@Schneider2009;
-@Tikir2009; @Hoefler2010; @Jo2015] have been developed each with different
+@Tikir2009; @Hoefler2010; @Jo2015] have been developed with different
 focus and purpose. However, existing simulators mostly focused on static
 interconnects and few researches have been done to simulate dynamic and
 application-aware interconnects.
@@ -74,8 +83,8 @@ This paper describes the design and implementation of an
 interconnect simulator specialized for dynamic interconnects to facilitate the
 research and development of such interconnects. Our simulator takes
 a set of communication patterns of applications and a cluster configuration as
-its input and simulates the congestion on each link of the interconnect. In
-addition to the simulator, we have developed a custom profiler to extract
+its input and then simulates the congestion on each link of the interconnect.
+In addition to the simulator, we have developed a custom profiler to extract
 communication patterns from applications for use in conjunction with our
 proposed simulator.
 
@@ -83,10 +92,11 @@ proposed simulator.
 The contributions of this paper are summarized as follows:
 
 - A lightweight interconnect simulator for simulating dynamic and
-  application-aware interconnects with multiple running jobs
-- A custom profiler for extracting communication patterns from applications
+  application-aware interconnects is proposed.
+- A custom profiler for extracting communication patterns from applications is
+  proposed.
 - Simulation results for NAS CG benchmark and NERSC MILC benchmark on a
-  fat-tree interconnect
+  fat-tree interconnect are presented.
 
 <!-- アウトライン -->
 The rest of this paper is organized as follows.
