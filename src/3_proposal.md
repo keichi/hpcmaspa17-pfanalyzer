@@ -9,8 +9,8 @@ implementation of our simulator is presented.
 ## MPI Profiler
 
 <!-- 何が既存のプロファイラと違うのか? なんでプロファイラを新規開発する? -->
-In order to speedup the simulation, we assume that the amount
-of traffic between processes is constant during the execution of a job. Under
+In order to simplify and speed up the simulation, we assume that the amount of
+traffic between processes is constant during the execution of a job. Under
 this assumption, we use the traffic matrix of an application as its
 communication pattern. To collect the traffic matrices from MPI applications,
 we developed an MPI profiler.
@@ -90,7 +90,7 @@ Furthermore, MPI functions for creating and destroying communicators are also
 hooked to maintain a mapping between global ranks (rank number within
 `MPI_COMM_WORLD`) and local ranks (rank number within communicators created by
 users). This mapping is necessary because PERUSE events are reported with
-local ranks, but profiling results should be described with global ranks for
+local ranks, while profiling results should be described with global ranks for
 the easiness of analysis.
 
 <!-- プロファイラの使い方 -->
@@ -140,8 +140,8 @@ profiler.
 \end{figure}
 
 <!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
-Each configuration value can be a list values. In that case, the simulation is
-executed multiple times each with a different combination of configuration
+Each configuration value can be a list of values. In that case, the simulation
+is executed multiple times each with a different combination of configuration
 values until all combinations are exhausted.
 
 \begin{table}[htbp]
@@ -179,11 +179,11 @@ events. This loop is repeated until the event queue is empty.
 
 <!-- ジョブの視点で見たシミュレーション処理の流れ -->
 Figure\ \ref{fig:simulator-flowchart} illustrates the life cycle of a
-simulated job. When a jobs is generated, it is initially enqueued to the job
-queue. As soon as there are enough number of unallocated computing nodes to
-execute a job, the scheduling algorithms determines the job to be executed
+simulated job. When a job is generated, it is initially enqueued to the job
+queue. As soon as there are unallocated computing nodes enough to
+execute a job, the scheduling algorithm determines the job to be executed
 next and pops it from the job queue. Subsequently, the node selection
-algorithms picks a set of computing nodes that can satisfy the requested
+algorithm picks a set of computing nodes that can satisfy the requested
 number of processes by the job. Then, the process placement algorithm
 determines on which computing node to run each process of the job. After the
 process placement is completed, the routing algorithm computes and allocates

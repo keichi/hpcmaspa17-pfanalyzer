@@ -115,8 +115,8 @@ measured the execution time of each benchmark.
 We compared the performance of point-to-point communication between
 two processes with and without our profiler to investigate the overhead
 incurred by the profiler. OSU Micro Benchmark\ [@omb] was used to measure the
-bandwidth and latency of point-to-point communication between two processes
-for varying message sizes. The comparison of bandwidth is shown in
+throughtput and latency of point-to-point communication between two processes
+for varying message sizes. The comparison of throughtput is shown in
 Fig.\ \ref{fig:bandwidth-overhead}. For messages larger than 1KB, the overhead
 is ignorable. For messages smaller than 1KB, up to 30% of overhead is
 incurred. Benchmark results for latency as shown in
@@ -126,13 +126,13 @@ latency.
 \begin{figure}[htbp]
     \centering
     \includegraphics{bandwidth_overhead}
-    \caption{Bandwidth of MPI\_Send/Recv between two nodes}
+    \caption{Throughput of MPI\_Send/Recv Between Two Nodes}
     \label{fig:bandwidth-overhead}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{latency_overhead}
-    \caption{Latency of MPI\_Send/Recv between two nodes}
+    \caption{Latency of MPI\_Send/Recv Between Two Nodes}
     \label{fig:latency-overhead}
 \end{figure}

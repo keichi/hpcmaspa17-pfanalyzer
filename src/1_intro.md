@@ -46,11 +46,11 @@ One of the core challenges towards realizing a dynamic and application-aware
 interconnect is to develop effective algorithms to control the packet flow in
 the interconnect depending on the communication patterns of applications.
 However, working on physical clusters to analyze the performance
-characteristics of the interconnect can be limited in several ways. First, the
-execution time of real-world HPC applications typically ranges from minutes up
-to hours. This slows down the iterative process of evaluation and
+characteristics of the interconnect can be restricted in several ways. First,
+the execution time of real-world HPC applications typically ranges from
+minutes up to hours. This slows down the iterative process of evaluation and
 improvement. Second, large-scale deployments of dynamic interconnects that
-allow execution of highly parallel applications are still not available.
+allow execution of highly parallel applications are  not available yet.
 Third, network hardware may not support measuring traffic in the interconnect
 with enough high frequency and precision to obtain meaningful insights.
 
@@ -65,7 +65,7 @@ difficult or impossible to acquire on physical clusters.
 <!-- 現在の相互結合網シミュレータの状況 -->
 In fact, a wide spectrum of interconnect simulators\ [@Schneider2009;
 @Tikir2009; @Hoefler2010; @Jo2015] have been developed each with different
-focus and aim. However, existing simulators mostly focused on static
+focus and purpose. However, existing simulators mostly focused on static
 interconnects and few researches have been done to simulate dynamic and
 application-aware interconnects.
 
