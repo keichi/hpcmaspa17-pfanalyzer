@@ -27,12 +27,12 @@ and routing algorithms are configured as follows:
   each host) is adopted.
 - _Routing_: Two routing algorithms are compared. The first one is
   \mbox{Destionation-modulo-K} (\mbox{D-mod-K}) routing, a popular
-  static load balancing routing algorithm that only solely the destination
-  address for load balancing. The second one is a greedy dynamic routing
-  algorithm where routes are computed and allocated from the heaviest
-  communicating process pair. A route is computed so as to minimize the weight
-  of the maximum-weight link in the path. Here, the weight of a link is
-  considered to be congestion.
+  static load balancing routing algorithm that distributes packet flow over
+  multiple paths based on the destination address of the packet. The second
+  one is a greedy dynamic routing algorithm where routes are computed and
+  allocated from the heaviest communicating process pair. A route is computed
+  so as to minimize the weight of the maximum-weight link in the path. Here,
+  the weight of a link is considered to be congestion.
 
 \begin{figure}[htbp]
     \centering
@@ -52,9 +52,14 @@ used the input dataset provided by NERSC as a part of the NERSC MILC
 benchmark. Both applications were executed with 128 MPI processes. Thread
 parallelism was not put in use (_i.e._ flat MPI model was adopted).
 
-Under this condition, we measured the maximum congestion on links and compared
+Under this condition, we measured the maximum traffic on links and compared
 them for \mbox{D-mod-K} routing and dynamic routing.
-Figure\ \ref{fig:nas-cg-congestion}: 50%. Figure\ \ref{fig:nersc-milc-congestion}: 18%
+Figure\ \ref{fig:nas-cg-congestion} shows the results for the NAS CG
+benchmark. The maximum traffic has decreased for 50% when using dynamic
+routing compared to static \mbox{D-mod-K} routing.
+Figure\ \ref{fig:nersc-milc-congestion} shows the result for the NERSC MILC
+benchmark. In this case, the use dynamic routing reduces the maximum traffic
+for 18%.
 
 \begin{figure}[htbp]
     \begin{subfigure}[t]{.47\linewidth}
