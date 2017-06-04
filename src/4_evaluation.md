@@ -92,7 +92,7 @@ measured the execution time of each benchmark.
         \caption{NERSC MILC Benchmark}
         \label{fig:nersc-milc-time}
         \end{subfigure}
-    \caption{Comparison of Excution TIme}
+    \caption{Comparison of Execution Time}
     \label{fig:single-job-time}
 \end{figure}
 

@@ -16,9 +16,10 @@ parameters. Furthermore, following requirements must be met by the simulator:
   simulation. Synthetically generated communication patterns might not reflect
   the characteristics of real-world applications well.
 - _Parallel job execution_: The simulator should allow concurrently running
-  multiple jobs to reproduce a realistic HPC cluster environment. This implies
-  that job scheduling, node selection and process mapping should also be
-  simulated since these affect.
+  multiple jobs to reproduce a realistic HPC cluster environment. Job
+  scheduling, node selection and process mapping should also be simulated
+  since these significantly affect the communication performance of
+  applications.
 - _Lightweight and fast simulation_: The simulator should be designed to be
   lightweight and fast to carry out large number of simulations with different
   parameters in a reasonable amount of time. If necessary, appropriate

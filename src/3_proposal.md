@@ -1,14 +1,14 @@
 # Proposal
 
 <!-- 提案の概要 -->
-We propose an interconnect simulator capable of simulating application-aware
-dynamic routing. In this section, we first describe our profiler to extract
-communication patterns from applications. Subsequently, the design and
-implementation of our simulator is presented.
+We propose a toolset for analyzing the performance characteristics of
+application-aware dynamic interconnects. The proposed toolset is composed of a
+simulator capable of simulating application-aware dynamic interconnects and a
+profiler to extract communication patterns from applications.
 
 ## MPI Profiler
 
-<!-- 何が既存のプロファイラと違うのか? なんでプロファイラを新規開発する? -->
+<!-- 通信パターンの定義 -->
 In order to simplify and speed up the simulation, we assume that the amount of
 traffic between processes is constant during the execution of a job. Under
 this assumption, we use the traffic matrix (for an application composed of
@@ -16,6 +16,7 @@ $n$ processes, a traffic matrix is defined as a $n \times n$ square matrix $T$
 of which element $T_{ij}$ is equal to the amount of traffic sent from rank
 $i$ to rank $j$) of an application as its communication pattern.
 
+<!-- 既存のプロファイラの問題点 -->
 Initially, we tried to reuse existing MPI performance analysis tools such as
 \mbox{Score-P}\ [@Knupfer2012], Vampir\ [@Knupfer2008] and Tau\ [@Shende2006]
 to collect the traffic matrices from MPI applications. However, these tools
@@ -23,6 +24,7 @@ capture only a subset of the communication pattern when profiling an
 application that uses collective communication functions (_e.g._ MPI_Bcast,
 MPI_Allreduce and MPI_Reduce).
 
+<!-- PMPIベースのプロファイラが集団通信の解析に失敗する理由 -->
 The reason is as follows. Existing MPI profilers replace the standard MPI
 functions provided by MPI libraries with instrumented functions by utilizing
 the MPI Profiling Interface (PMPI). An advantage of this approach is that it
@@ -135,7 +137,7 @@ is described in GraphML\ [@Brandes2013], an XML-based markup language for
 graphs. Popular graph visualization tools such as Cytoscape\ [@Shannon2003]
 and Gephi\ [@Bastian2009] can be used to view and edit GraphML files.
 Communication pattern files are obtained from applications using our custom
-profiler.
+profiler described in section \ref{mpi-profiler}.
 
 \begin{figure}[htbp]
     \centering

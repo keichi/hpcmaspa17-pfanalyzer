@@ -53,15 +53,17 @@ successfully accelerated in our previous works\ [@Takahashi2014;
 <!-- 動的な相互結合網の実機での研究開発の難しさ -->
 One of the core challenges towards realizing a dynamic and application-aware
 interconnect is to develop effective algorithms to control the packet flow in
-the interconnect depending on the communication patterns of applications.
-However, working on physical clusters to analyze the performance
-characteristics of the interconnect can be restricted in several ways. First,
-the execution time of real-world HPC applications typically ranges from
-minutes up to hours. This slows down the iterative process of evaluation and
-improvement. Second, large-scale deployments of dynamic interconnects that
-allow execution of highly parallel applications are  not available yet.
-Third, network hardware may not support measuring traffic in the interconnect
-with enough high frequency and precision to obtain meaningful insights.
+the interconnect depending on the communication patterns of applications. In
+order to develop a generic algorithm that achieves good performance on a
+variety of environments, the algorithm must be evaluated on different
+applications and interconnects. However, working on physical clusters to
+analyze the performance characteristics of the interconnect can be restricted
+in several ways. First, the execution time of real-world HPC applications
+typically ranges from minutes up to hours. Second, large-scale deployments of
+dynamic interconnects that allow execution of highly parallel applications are
+not available yet. Third, network hardware may not support measuring traffic
+in the interconnect with enough high frequency and precision to obtain
+meaningful insights.
 
 <!-- シミュレータの有用性 -->
 On the contrary, interconnect simulators have several advantages compared to
@@ -99,12 +101,12 @@ The contributions of this paper are summarized as follows:
   fat-tree interconnect are presented.
 
 <!-- アウトライン -->
-The rest of this paper is organized as follows.
-Section\ \ref{research-objective} examines the requirements of an interconnect
-simulator for dynamic and application-aware interconnects.
-Section\ \ref{proposal} describes the design and implementation of our
-presented simulator and profiler. Section\ \ref{evaluation} presents the
-simulation results for NAS CG benchmark and NERSC MILC benchmark obtained with
-our proposed simulator. Furthermore, results of a verification experiment on a
-physical cluster is shown. Section\ \ref{related-work} reviews related work.
-Section\ \ref{conclusion} concludes this paper and outlines our future work.
+The rest of this paper is organized as follows. Section\ \ref{related-work}
+reviews related work. Section\ \ref{research-objective} examines the
+requirements of an interconnect simulator for dynamic and application-aware
+interconnects. Section\ \ref{proposal} describes the design and implementation
+of our presented simulator and profiler. Section\ \ref{evaluation} presents
+the simulation results for NAS CG benchmark and NERSC MILC benchmark obtained
+with our proposed simulator. Furthermore, results of a verification experiment
+on a physical cluster is shown. Section\ \ref{conclusion} concludes this paper
+and outlines our future work.
