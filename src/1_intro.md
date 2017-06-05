@@ -67,7 +67,7 @@ meaningful insights.
 
 <!-- シミュレータの有用性 -->
 On the contrary, interconnect simulators have several advantages compared to
-physical clusters. Simulators allow users to carry out systematic investigation
+physical clusters. Simulators allow users to conduct systematic investigation
 of clusters with diverse topologies and parameters. Furthermore, simulators
 make experiments on extremely large-scale virtual environments possible. They
 also allow measuring and recording metrics that are either difficult or
