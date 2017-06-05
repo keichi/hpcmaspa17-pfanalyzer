@@ -73,7 +73,7 @@ for 18%.
         \caption{NERSC MILC Benchmark}
         \label{fig:nersc-milc-congestion}
     \end{subfigure}
-    \caption{Comparison of Maximum Congestion}
+    \caption{Comparison of Maximum Traffic}
     \label{fig:singe-job-congestion}
 \end{figure}
 
