@@ -27,7 +27,7 @@ Nowadays, the majority of HPC clusters employ static interconnects because of
 the low implementation cost. Since static interconnects are controlled without
 taking the communication patterns of individual applications into account,
 they are usually designed to be able to accommodate  worst-case traffic demand
-to achieve good performance for a variety of applications each with a
+to achieve good performance for a variety of applications each of which has a
 different communication pattern. Interconnect designers have put great
 emphasis on properties such as full bisection bandwidth and nonblockingness.
 
@@ -68,10 +68,10 @@ meaningful insights.
 <!-- シミュレータの有用性 -->
 On the contrary, interconnect simulators have several advantages compared to
 physical clusters. Simulators allow users to carry out systematic investigation
-of diverse clusters with different topologies and parameters. Furthermore,
-simulators make experiments on extremely large-scale virtual environments
-possible. They also allow measuring and recording metrics that are either
-difficult or impossible to acquire on physical clusters.
+of clusters with diverse topologies and parameters. Furthermore, simulators
+make experiments on extremely large-scale virtual environments possible. They
+also allow measuring and recording metrics that are either difficult or
+impossible to acquire on physical clusters.
 
 <!-- 現在の相互結合網シミュレータの状況 -->
 In fact, a wide spectrum of interconnect simulators\ [@Schneider2009;
@@ -101,12 +101,13 @@ The contributions of this paper are summarized as follows:
   fat-tree interconnect are presented.
 
 <!-- アウトライン -->
-The rest of this paper is organized as follows. Section\ \ref{related-work}
-reviews related work. Section\ \ref{research-objective} examines the
-requirements of an interconnect simulator for dynamic and application-aware
-interconnects. Section\ \ref{proposal} describes the design and implementation
-of our presented simulator and profiler. Section\ \ref{evaluation} presents
-the simulation results for NAS CG benchmark and NERSC MILC benchmark obtained
-with our proposed simulator. Furthermore, results of a verification experiment
-on a physical cluster is shown. Section\ \ref{conclusion} concludes this paper
-and outlines our future work.
+The rest of this paper is organized as follows.
+Section\ \ref{research-objective} examines the requirements of an interconnect
+simulator for dynamic and application-aware interconnects.
+Section\ \ref{related-work} reviews related work. Section\ \ref{proposal}
+describes the design and implementation of our presented simulator and
+profiler. Section\ \ref{evaluation} presents the simulation results for
+NAS CG benchmark and NERSC MILC benchmark obtained with our proposed
+simulator. Furthermore, results of a verification experiment on a physical
+cluster is shown. Section\ \ref{conclusion} concludes this paper and outlines
+our future work.

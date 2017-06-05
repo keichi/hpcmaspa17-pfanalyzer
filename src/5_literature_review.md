@@ -30,7 +30,7 @@ patterns of applications and interconnect usage to make routing decisions.
 In [@Jo2015], simulations are carried out to examine the performance
 characteristics of an SDN-based multipath routing algorithm for data center
 networks. A simulator is developed based on MiniSSF to simulate the throughput
-and delay of a traffic flow under diverse settings. However, communication
+and delay of a packet flow under diverse settings. However, communication
 patterns are randomly generated and not based on real-world applications. Our
 proposed simulator accepts arbitrary communication patterns obtained from
 real-world applications using our custom profiler.

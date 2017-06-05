@@ -148,8 +148,8 @@ profiler described in section \ref{mpi-profiler}.
 
 <!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
 Each configuration value can be a list of values. In that case, the simulation
-is executed multiple times each with a different combination of configuration
-values until all combinations are exhausted.
+is executed multiple times each time with a different combination of
+configuration values until all combinations are exhausted.
 
 \begin{table}[htbp]
     \centering

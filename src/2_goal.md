@@ -3,8 +3,8 @@
 In this paper, we aim to realize an  interconnect simulator specialized for
 dynamic interconnects to facilitate the research and development of such
 interconnects. One of the main goal is to allow users to perform a systematic
-investigation of diverse interconnect with different topologies and
-parameters. Furthermore, following requirements must be met by the simulator:
+investigation of interconnect with diverse topologies and parameters.
+Furthermore, following requirements must be met by the simulator:
 
 - _Application-aware dynamic routing_: To develop and analyze methods to
   control dynamic interconnects in an application-aware manner, dynamic
