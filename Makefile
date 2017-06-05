@@ -44,4 +44,4 @@ archive:
 	git archive --format tar.gz HEAD --output hpcmaspa.tar.gz
 
 release: main.pdf
-	gs -q -dNOPAUSE -dBATCH -dPDFSETTINGS=/printer -sDEVICE=pdfwrite -dCompressFonts=true -dSubsetFonts=true -sOutputFile=hpcmaspa2017_takahashi.pdf main.pdf
+	gs -q -dNOPAUSE -dBATCH -dPDFSETTINGS=/printer -sDEVICE=pdfwrite -dCompressFonts=true -dSubsetFonts=true -sOutputFile=hpcmaspa2017_$(shell date +"%m%d").pdf main.pdf

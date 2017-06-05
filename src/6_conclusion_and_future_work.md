@@ -1,10 +1,10 @@
 # Conclusion
 
-This paper describes the design and implementation of an
+This paper described the design and implementation of an
 interconnect simulator specialized for dynamic interconnects to facilitate the
 research and development of such interconnects. Our simulator takes
 a set of communication patterns of applications and a cluster configuration as
-its input and then simulates the congestion on each link of the interconnect.
+its input and then simulates the traffic on each link of the interconnect.
 In addition to the simulator, we have developed a custom profiler to extract
 communication patterns from applications for use in conjunction with our
 proposed simulator.
