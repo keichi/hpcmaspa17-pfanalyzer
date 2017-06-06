@@ -33,9 +33,9 @@ uses the conjugate gradient method, which appears frequently in irregular mesh
 applications. The second one is an application (`ks_imp_dyn`) from MIMD
 Lattice Computation (MILC)\ [@milc], a collection of applications used to
 study Quantum Chromodynamics (QCD). We used the input dataset provided by
-NERSC as a part of the NERSC MILC benchmark. Both applications were executed
-with 128 MPI processes. Thread parallelism was not put in use (_i.e._ flat MPI
-model was adopted).
+NERSC as a part of the NERSC MILC benchmark. These two applications were
+executed with 128 MPI processes. Thread parallelism was not put in use (_i.e._
+flat MPI model was adopted).
 
 To analyze the effect of dynamic interconnect control, simulations were
 carried out either using static routing or dynamic routing. Furthermore, in
@@ -68,16 +68,17 @@ algorithms used in this experiment:
   traffic of the maximum-traffic link in the path.
 
 Under this condition, we measured and compared the maximum traffic load on
-links. Figure\ \ref{fig:nas-cg-multi-congestion} shows the results for the NAS
-CG benchmark. What stands out in this plot is that dynamic routing
-consistently achieves lower traffic load compared to static \mbox{D-mod-K}
-routing. The difference of traffic load is largest when linear node selection
-and block process placement is adopted. Under this configuration, dynamic
-routing reduces maximum traffic load for 50% compared to \mbox{D-mod-K}
-routing. In addition, the graph reveals that cyclic process placement always
-increases maximum traffic load compared to block process placement. This is
-considered to be because neighboring ranks are placed on different computing
-nodes despite of the locality of the communication pattern.
+links. Figure\ \ref{fig:nas-cg-multi-congestion} shows the simulation results
+results in the case of the NAS CG benchmark. What stands out in this plot is
+that dynamic routing consistently achieves lower traffic load compared to
+static \mbox{D-mod-K} routing. The difference of traffic load was largest when
+linear node selection and block process placement is adopted. Under this
+configuration, dynamic routing slashed maximum traffic load by 50% compared to
+\mbox{D-mod-K} routing. In addition, the graph reveals that cyclic process
+placement always increased maximum traffic load compared to block process
+placement. This is considered to be because neighboring ranks are placed on
+different computing nodes despite of the locality of the communication
+pattern.
 
 \begin{figure}[htbp]
     \centering
@@ -110,7 +111,7 @@ execution time for 10 runs was compared when using \mbox{D-mod-K} routing and
 dynamic routing.
 
 Figure\ \ref{fig:nas-cg-time} shows the comparison for NAS CG benchmark.
-The graph indicates that the use of dynamic routing reduces the execution time
+The graph indicates that the use of dynamic routing reduced the execution time
 of the benchmark for 23%. Figure\ \ref{fig:nersc-milc-time} shows the result
 for NERSC MILC benchmark. In this case, approximately 8% was reduced in
 execution time. These results suggest that the use of dynamic interconnect

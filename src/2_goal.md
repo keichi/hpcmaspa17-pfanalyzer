@@ -20,11 +20,11 @@ simulator are described as follows:
   decisions.
 - _Support for communication patterns of real-world applications_:
   Communication patterns of real-world HPC applications should be able to be
-  fed into the simulator because synthetically generated communication
-  patterns might not reflect the characteristics of real-world applications
-  well. Consequently, some means and mechanisms to extract communication
-  patterns from applications are essential as well. In this paper,
-  applications that leverage MPI for inter-process communication are targeted.
+  fed into the simulator to reproduce the communication characteristics of
+  real-world applications. Consequently, some means and mechanisms to extract
+  communication patterns from applications are essential as well. In this
+  paper, applications that leverage MPI for inter-process communication are
+  targeted.
 - _Support for diverse cluster configurations_: The distribution of packet
   flow in the interconnect is determined by not only the routing algorithm but
   also the topology of the interconnect. Also, the job scheduling, node
