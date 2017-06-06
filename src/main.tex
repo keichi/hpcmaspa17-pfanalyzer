@@ -19,7 +19,7 @@
 \usepackage[hidelinks]{hyperref}
 \RequirePackage[l2tabu, orthodox]{nag}
 
-\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubfigure{~(\alph{subfigure})}
 
 % Fix for pandoc 1.14
 \providecommand{\tightlist}{}
@@ -79,14 +79,14 @@
     interconnects. As a result, current static and over-provisioned
     interconnects are becoming cost-ineffective. From the background, we have
     been currently working on the integration of network programmability into
-    the interconnect control, based on our idea that dynamically optimizing
+    the interconnect control, based on the idea that dynamically optimizing
     the packet flow in the interconnect to fit the communication pattern of
     applications can increase the utilization of interconnects and improve
     application performance. Simulators come in handy especially when
     investigating the performance characteristics of interconnects with
     different topologies and parameters. However, little effort has been put
     for the simulation of dynamically controlled interconnects, while
-    simulators for static interconnects has been extensively researched and
+    simulators for static interconnects have been extensively researched and
     developed. To facilitate the analysis on the performance characteristics
     of dynamic interconnects, we have developed a simulator specialized to
     dynamic interconnects. Our simulator allows interconnect researchers and
@@ -99,7 +99,7 @@
 
 \begin{IEEEkeywords}
     Simulation, Profiling, Interconnect, Message Passing Interface, Software
-    Defined Network
+    Defined Networking
 \end{IEEEkeywords}
 
 % Body

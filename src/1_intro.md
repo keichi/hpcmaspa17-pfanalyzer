@@ -14,22 +14,23 @@ communication on HPC clusters.
 
 <!-- 静的相互結合網と動的相互結合網の定義 -->
 In this paper, interconnects are roughly classified into _static interconnects_
-and _dynamic interconnects_. In static interconnects, packets flow is
+and _dynamic interconnects_. In static interconnects, packet flow is
 controlled solely based on its source and/or destination. A well-known
 exemplifier is InfiniBand\ [@InfiniBand2015], where forwarding tables of
 switches are populated with pre-computed forwarding rules in advance of the
-execution of applications. In contrast, packets flow in dynamic interconnect
+execution of applications. In contrast, packet flow in dynamic interconnect
 is controlled depending on various conditions such as the communication
 pattern of applications and utilization of interconnect.
 
 <!-- 現在の相互結合網のトレンド (静的、それ故の過剰投資) -->
-Nowadays, the majority of HPC clusters employ static interconnects because of
-the low implementation cost. Since static interconnects are controlled without
-taking the communication patterns of individual applications into account,
-they are usually designed to be able to accommodate  worst-case traffic demand
-to achieve good performance for a variety of applications each of which has a
-different communication pattern. Interconnect designers have put great
-emphasis on properties such as full bisection bandwidth and nonblockingness.
+Nowadays, the majority of HPC clusters employ the former static interconnects
+because of the low implementation cost. Since static interconnects are
+controlled without taking the communication patterns of individual
+applications into account, they are usually designed to be able to accommodate
+the worst-case traffic demand to achieve a good performance for a variety of
+applications, each of which has a different communication pattern.
+Interconnect designers have put great emphasis on criteria such as full
+bisection bandwidth and nonblockingness.
 
 <!-- 相互結合網の大規模・複雑化と静的な相互結合網の限界 -->
 The continuously growing demand for computing power from academia and industry
@@ -39,31 +40,32 @@ large-scale and complex. This technical trend is making static and
 over-provisioned interconnects cost-ineffective and difficult to build.
 
 <!-- 動的な相互結合網の提案 + SDN-enhanced MPI -->
-Based on the background, we have been developing _SDN-enhanced MPI_, which is
-a framework that incorporates the dynamic network controllability of
-Software-Defined Networking (SDN)\ [@sdn] into MPI. SDN-enhanced MPI is based
-on the idea that dynamically optimizing the packet flow in the interconnect to
-fit the communication patterns of applications can increase the utilization of
-interconnect and improve application performance. The goal of SDN-enhanced MPI
-is to accelerate individual MPI primitives by dynamically optimizing the
-packet flow in the interconnect. So far, several MPI primitives has been
-successfully accelerated in our previous works\ [@Takahashi2014;
-@Dashdavaa2013].
+Based on the background and trend, we have been seeking for the feasibility
+and applicability of network programmability of dynamic interconnects into
+HPC\ [@Date2016]. In particular, _SDN-enhanced MPI_\ [@Takahashi2014;
+@Dashdavaa2013], which is a framework that incorporates the dynamic network
+controllability of Software-Defined Networking (SDN)\ [@sdn] into MPI has been
+researched based on the idea that dynamically optimizing the packet flow in
+the interconnect to fit the communication patterns of applications can
+increase the utilization of interconnect and improve application performance.
+The goal of SDN-enhanced MPI is to accelerate individual MPI primitives by
+dynamically optimizing the packet flow in the interconnect. So far, several
+MPI primitives has been successfully accelerated in our previous works.
 
 <!-- 動的な相互結合網の実機での研究開発の難しさ -->
 One of the core challenges towards realizing a dynamic and application-aware
 interconnect is to develop effective algorithms to control the packet flow in
 the interconnect depending on the communication patterns of applications. In
 order to develop a generic algorithm that achieves good performance on a
-variety of environments, the algorithm must be evaluated on different
-applications and interconnects. However, working on physical clusters to
-analyze the performance characteristics of the interconnect can be restricted
-in several ways. First, the execution time of real-world HPC applications
-typically ranges from minutes up to hours. Second, large-scale deployments of
-dynamic interconnects that allow execution of highly parallel applications are
-not available yet. Third, network hardware may not support measuring traffic
-in the interconnect with enough high frequency and precision to obtain
-meaningful insights.
+variety of environments, the algorithm must be investigated and evaluated
+targeting different applications and interconnects. However, utilizing on
+physical clusters to analyze the performance characteristics of the
+interconnect is restricted in the following ways. First, the execution time of
+real-world HPC applications typically ranges from hours up to days event
+month. Second, large-scale deployments of dynamic interconnects that allow
+execution of highly parallel applications are not available yet. Third,
+network hardware may not support measuring traffic in the interconnect with
+enough high frequency and precision to obtain meaningful insights.
 
 <!-- シミュレータの有用性 -->
 On the contrary, interconnect simulators have several advantages compared to
@@ -75,9 +77,9 @@ impossible to acquire on physical clusters.
 
 <!-- 現在の相互結合網シミュレータの状況 -->
 In fact, a wide spectrum of interconnect simulators  have been developed with
-different focus and purpose. However, existing simulators mostly focused on
-static interconnects and few researches have been done to simulate dynamic and
-application-aware interconnects.
+different focus and purpose until today. However, existing simulators mostly
+focused on static interconnects and few researches have been done to simulate
+dynamic and application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
 This paper describes the design and implementation of an

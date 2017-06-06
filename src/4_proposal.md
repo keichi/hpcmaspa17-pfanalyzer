@@ -25,13 +25,13 @@ application that uses collective communication functions (_e.g._ MPI_Bcast,
 MPI_Allreduce and MPI_Reduce).
 
 <!-- PMPIベースのプロファイラが集団通信の解析に失敗する理由 -->
-The reason is as follows. Existing MPI profilers replace the standard MPI
-functions provided by MPI libraries with instrumented functions by utilizing
-the MPI Profiling Interface (PMPI). An advantage of this approach is that it
-works regardless of a specific MPI implementation. However, it fails to capture
-the internal information of the MPI library. Meanwhile, collective
-communication functions are internally implemented as a combination of
-point-to-point communication in MPI implementations. These underlying
+The reason can be explained as follows. Existing MPI profilers replace the
+standard MPI functions provided by MPI libraries with instrumented functions
+by utilizing the MPI Profiling Interface (PMPI). An advantage of this approach
+is that it works regardless of a specific MPI implementation. However, it
+fails to capture the internal information of the MPI library. Meanwhile,
+collective communication functions are internally implemented as a combination
+of point-to-point communication in MPI implementations. These underlying
 point-to-point communication are hidden from PMPI-based profilers and excluded
 from the communication patterns emitted by profilers.
 
@@ -82,7 +82,7 @@ MPI application and interact with each other. The profiler hooks MPI_Init and
 MPI_Finalize to perform initialization and finalization. During the
 initialization, the profiler subscribes to two PERUSE events:
 `PERUSE_COMM_REQ_XFER_BEGIN` and `PERUSE_COMM_REQ_XFER_END`. These events are
-fired each time a transfer of a message begins and ends, respectively.
+emitted each time a transfer of a message begins and ends, respectively.
 Profiling results are written out as a JSON file during the finalization.
 During the execution of application, three statistics shown below are
 aggregated online by the profiler:
@@ -116,8 +116,6 @@ processes, respectively. These visualizations clearly reveal the spatial
 locality and sparsity of the communication pattern.
 Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
 
-\newpage
-
 ## Interconnect Simulator
 
 <!-- 提案の概要 -->
@@ -133,7 +131,7 @@ application-aware dynamic interconnects.
 
 <!-- シミュレータの入力 (シナリオ)-->
 Figure\ \ref{fig:simulator-block} shows the input and output for our
-simulator. The simulation scenario file defines various configures for a
+simulator. The simulation scenario file defines various configurations for a
 simulation run. This file defines the cluster configuration to use and set of
 jobs. Moreover, algorithms that control the execution and communication of
 jobs as shown in Table\ \ref{tbl:simulator-algorithm} are specified. The
@@ -154,8 +152,8 @@ profiler described in the previous section \ref{mpi-profiler}.
 
 <!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
 Each configuration value can be a list of values. In that case, the simulation
-is executed multiple times each time with a different combination of
-configuration values until all combinations are exhausted.
+is executed multiple times, each time with a different combination of
+configuration values until all combinations are completed.
 
 \begin{table}[htbp]
     \centering
@@ -164,10 +162,10 @@ configuration values until all combinations are exhausted.
     \label{tbl:simulator-algorithm}
     \begin{tabularx}{\linewidth}{lX}
         \hline
-        Algorithm         & Description                                      \\
+        Algorithm         & Description                                                 \\
         \hline \hline
         Job Scheduling    & Selects the job to execute from the job queue.
-                            (\emph{e.g.} FCFS, Backfill)                     \\ \hline
+                            (\emph{e.g.} FCFS, Backfill)                                \\ \hline
         Node Selection    & Selects which computing nodes to assign for a job.
                             (\emph{e.g.} Linear, Random, Topology-aware algorithms)     \\ \hline
         Process Placement & Determines on which computing node to place a process.
@@ -204,8 +202,8 @@ set of computing nodes that can satisfy the requested number of processes by
 the job. Then, the process placement algorithm determines on which computing
 node to run each process of the job. After the process placement is completed,
 the routing algorithm computes and allocates routes for all communicating pair
-of processes. Since we would like to allow users to implement
-application-aware dynamic routings, various information are supplied to the
+of processes. As we would like to allow users to implement
+application-aware dynamic routings, additional information are supplied to the
 routing algorithm in addition to the source/destination process pair. The
 information includes process placement, communication pattern and interconnect
 usage. For each allocated route, the traffic on the link contained in the

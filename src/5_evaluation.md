@@ -1,5 +1,7 @@
 # Evaluation
 
+<!-- 注: 時制は過去を使うこと -->
+
 In this section, we first simulate the traffic load of a fat-tree interconnect
 when using static interconnect control and dynamic interconnect control. The
 accuracy of the obtained simulation results are then verified using benchmark
@@ -8,12 +10,12 @@ incurred by our profiler.
 
 ## Simulation Results
 
-In this experiment, communication-intensive MPI applications are executed
-on our simulator. The maximum traffic load of the links in the interconnect is
+In this experiment, communication-intensive MPI applications were executed on
+our simulator. The maximum traffic load of the links in the interconnect was
 compared for static interconnect control and dynamic interconnect control. The
-simulated cluster is modeled after a physical cluster installed at our
-institution. It is composed of 20 computing nodes each equipped with 8 cores.
-Computing nodes are interconnected with a fat-tree topology as illustrated in
+simulated cluster as modeled after a physical cluster installed at our
+institution. It was composed of 20 computing nodes each equipped with 8 cores.
+Computing nodes were interconnected with a fat-tree topology as illustrated in
 Fig.\ \ref{fig:cluster-config}.
 
 \begin{figure}[htbp]
@@ -58,7 +60,7 @@ algorithms used in this experiment:
    process placement assigns rank $i$ to the $(i \bmod n)$-th computing
    node where $n$ denotes the number of computing nodes.
 - _Routing_: Either D-mod-K routing or a dynamic routing is adopted.
-  \mbox{Destionation-modulo-K} (\mbox{D-mod-K}) routing is a popular static
+  \mbox{Destination-modulo-K} (\mbox{D-mod-K}) routing is a popular static
   load balancing routing algorithm that distributes packet flow over multiple
   paths based on the destination address of the packet. A greedy dynamic
   routing algorithm where routes are computed and allocated from the heaviest
@@ -91,8 +93,6 @@ nodes despite of the locality of the communication pattern.
     \label{fig:nersc-milc-multi-congestion}
 \end{figure}
 
-\newpage
-
 Figure\ \ref{fig:nersc-milc-multi-congestion} shows the result for the NERSC
 MILC benchmark. The graph reveals that dynamic routing outperforms
 \mbox{D-mod-K} routing again. In this case, the difference of link load is
@@ -106,16 +106,16 @@ To verify the accuracy of our simulator, we reproduced the configuration
 described in the previous section \ref{simulation-results} on a physical
 cluster and measured the execution time of each benchmark. In this experiment,
 linear node selection and block process placement was adopted. The average
-execution time for 10 runs is compared when using \mbox{D-mod-K} routing and
+execution time for 10 runs was compared when using \mbox{D-mod-K} routing and
 dynamic routing.
 
 Figure\ \ref{fig:nas-cg-time} shows the comparison for NAS CG benchmark.
 The graph indicates that the use of dynamic routing reduces the execution time
 of the benchmark for 23%. Figure\ \ref{fig:nersc-milc-time} shows the result
-for NERSC MILC benchmark. In this case, the execution time is reduced for 8%.
-These results suggest that the use of dynamic interconnect control reduces
-traffic load on the bottleneck link and therefore reduces the execution time
-of applications.
+for NERSC MILC benchmark. In this case, approximately 8% was reduced in
+execution time. These results suggest that the use of dynamic interconnect
+control reduces traffic load on the bottleneck link and therefore reduces the
+execution time of applications.
 
 \begin{figure}[htbp]
     \begin{subfigure}[t]{.47\linewidth}
@@ -137,7 +137,7 @@ of applications.
 ## Profiling Overhead
 
 In this experiment, the performance of point-to-point communication between
-two processes with and without our profiler are compared to investigate the
+two processes with and without our profiler were compared to investigate the
 overhead incurred by the profiler. OSU Micro Benchmark\ [@omb] was used to
 measure the throughtput and latency of point-to-point communication between
 two processes for varying message sizes. The comparison of throughtput is

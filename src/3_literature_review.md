@@ -1,6 +1,6 @@
 # Related Work
 
-Several interconnect simulators have been proposed in previous researches.
+Several interconnect simulators have been proposed in the past researches.
 PSINS\ [@Tikir2009] is a trace-driven simulator for HPC applications.
 Traces obtained from applications are used to predict the performance of
 applications on a variety of HPC clusters with different configurations.
@@ -8,9 +8,9 @@ LogGOPSim\ [@Hoefler2010] simulates the execution of MPI applications based on
 the LogGOP network model. Both simple synthetic communication patterns and
 communication patterns converted from traces of MPI applications can be fed
 into the simulator. A limitation of LogGOPSim is that the interconnect is
-assumed to have full bisection bandwidth and congestion is ignored. Both
-simulators can provide accurate performance predictions owing to their
-per-message simulation capability.
+assumed to have full bisection bandwidth and congestion is not simulated.
+These two simulators can provide accurate performance predictions owing to
+their per-message simulation capability.
 
 However, PSINS and LogGOPSim do not simulate specific interconnect topologies
 nor routing algorithms. Therefore, these simulators are not suitable for
