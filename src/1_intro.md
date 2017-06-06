@@ -41,45 +41,45 @@ over-provisioned interconnects cost-ineffective and difficult to build.
 
 <!-- 動的な相互結合網の提案 + SDN-enhanced MPI -->
 Based on the background and trend, we have been seeking for the feasibility
-and applicability of network programmability of dynamic interconnects into
+and applicability of the network programmability of dynamic interconnects to
 HPC\ [@Date2016]. In particular, _SDN-enhanced MPI_\ [@Takahashi2014;
 @Dashdavaa2013], which is a framework that incorporates the dynamic network
 controllability of Software-Defined Networking (SDN)\ [@sdn] into MPI has been
 researched based on the idea that dynamically optimizing the packet flow in
-the interconnect to fit the communication patterns of applications can
+the interconnect according to the communication patterns of applications can
 increase the utilization of interconnect and improve application performance.
-The goal of SDN-enhanced MPI is to accelerate individual MPI primitives by
+The goal of SDN-enhanced MPI is to accelerate individual MPI functions by
 dynamically optimizing the packet flow in the interconnect. So far, several
-MPI primitives has been successfully accelerated in our previous works.
+MPI functions has been successfully accelerated in our previous works. One of
+the core challenges in the research of SDN-enhanced MPI is to develop
+algorithms to control the packet flow in the interconnect depending on the
+MPI function called by the application.
 
 <!-- 動的な相互結合網の実機での研究開発の難しさ -->
-One of the core challenges towards realizing a dynamic and application-aware
-interconnect is to develop effective algorithms to control the packet flow in
-the interconnect depending on the communication patterns of applications. In
+More generally, developing effective algorithms to control the packet flow in
+the interconnect depending on the communication patterns of applications is
+essential towards realizing a dynamic and application-aware interconnect. In
 order to develop a generic algorithm that achieves good performance on a
 variety of environments, the algorithm must be investigated and evaluated
-targeting different applications and interconnects. However, utilizing on
+targeting different applications and interconnects. However, utilizing
 physical clusters to analyze the performance characteristics of the
 interconnect is restricted in the following ways. First, the execution time of
 real-world HPC applications typically ranges from hours up to days event
 month. Second, large-scale deployments of dynamic interconnects that allow
-execution of highly parallel applications are not available yet. Third,
-network hardware may not support measuring traffic in the interconnect with
-enough high frequency and precision to obtain meaningful insights.
+execution of highly parallel applications are not available yet because
+research and development of dynamic interconnects are still at their early
+stage. Third, network hardware may not support measuring traffic in the
+interconnect with enough high frequency and precision to obtain meaningful
+insights.
 
 <!-- シミュレータの有用性 -->
-On the contrary, interconnect simulators have several advantages compared to
-physical clusters. Simulators allow users to conduct systematic investigation
-of clusters with diverse topologies and parameters. Furthermore, simulators
-make experiments on extremely large-scale virtual environments possible. They
-also allow measuring and recording metrics that are either difficult or
-impossible to acquire on physical clusters.
-
-<!-- 現在の相互結合網シミュレータの状況 -->
-In fact, a wide spectrum of interconnect simulators  have been developed with
-different focus and purpose until today. However, existing simulators mostly
-focused on static interconnects and few researches have been done to simulate
-dynamic and application-aware interconnects.
+To accelerate the research and development of application-aware dynamic
+interconnects, interconnect simulators that allow users to to conduct
+systematic investigation of clusters with diverse topologies and parameters
+are vital. A wide spectrum of interconnect simulators  have been developed
+with different focus and purpose until today. However, existing simulators
+mostly focused on static interconnects and few researches have been
+done to simulate dynamic and application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
 This paper describes the design and implementation of an

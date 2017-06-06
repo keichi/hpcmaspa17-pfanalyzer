@@ -9,12 +9,14 @@ capable of simulating application-aware dynamic interconnects.
 ## MPI Profiler
 
 <!-- 通信パターンの定義 -->
-In order to simplify and speed up the simulation, we assume that the amount of
-traffic between processes is constant during the execution of a job. Under
-this assumption, we use the traffic matrix (for an application composed of
-$n$ processes, a traffic matrix is defined as a $n \times n$ square matrix $T$
-of which element $T_{ij}$ is equal to the amount of traffic sent from rank
-$i$ to rank $j$) of an application as its communication pattern.
+In this paper, we represent the communication pattern of an applications using
+the traffic matrix of the application. For an application composed of $n$
+processes, its traffic matrix is defined as a $n \times n$ square matrix $T$
+of which element $T_{ij}$ is equal to the volume of traffic sent from rank $i$
+to rank $j$. Here, we approximate that the volume of traffic between
+processes is constant during the execution of a job and compute the volume of
+traffic from the total number of bytes transferred between a process pair.
+The purpose of this approximation is to simplify and speed up the simulation.
 
 <!-- 既存のプロファイラの問題点 -->
 Initially, we tried to reuse existing MPI performance analysis tools such as

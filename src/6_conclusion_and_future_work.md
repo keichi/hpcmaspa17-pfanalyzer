@@ -1,5 +1,3 @@
-\newpage
-
 # Conclusion
 
 This paper described the design and implementation of a toolset for analyzing

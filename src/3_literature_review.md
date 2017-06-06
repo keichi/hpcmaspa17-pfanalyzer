@@ -34,3 +34,10 @@ and delay of a packet flow under diverse settings. However, communication
 patterns are randomly generated and not based on real-world applications. Our
 proposed simulator accepts arbitrary communication patterns obtained from
 real-world applications using our custom profiler.
+
+$\mathit{INAM}^2$ [@Subramoni2016] is a comprehensive tool to monitor and
+analyze the traffic in an InfiniBand network. The tight integration with the
+job scheduler and co-designed MPI library allows $\mathit{INAM}^2$ to
+associate network activities with MPI. For example, a significant features of
+$\mathit{INAM}^2$ is to locate hot spots in the interconnect and
+reverse-lookup its source to node, job or process.
