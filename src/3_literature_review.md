@@ -12,15 +12,16 @@ assumed to have full bisection bandwidth and congestion is not simulated.
 These two simulators can provide accurate performance predictions owing to
 their per-message simulation capability.
 
-However, PSINS and LogGOPSim do not simulate specific interconnect topologies
-nor routing algorithms. Therefore, these simulators are not suitable for
-in-depth research of interconnects. In contrast, our simulator allows users to
-compare the performance characteristic of different topologies and routing
-algorithms.
+However, the topology and the routing algorithm of interconnects are
+abstracted away in the network models of PSINS and LogGOPSim. Therefore, these
+simulators cannot be used for predicting and comparing the performance of
+different topologies or routing algorithms. In contrast, our simulator allows
+users to compare the performance characteristic of different topologies and
+routing algorithms.
 
-ORCS\ [@Schneider2009] simulates the congestion of each link in the
+ORCS\ [@Schneider2009] simulates the traffic load of each link in the
 interconnect for a given topology, communication pattern and routing
-algorithm. The simulated congestion of links can be summarized into various
+algorithm. The simulated traffic load of links can be summarized into various
 performance metrics and used for further analysis. A limitation of ORCS is
 that only pre-defined communication patterns can be used as its input.
 Moreover, ORCS assumes static routing as in InfiniBand. On the contrary,

@@ -6,17 +6,32 @@ application-aware dynamic interconnects. The proposed toolset is composed of a
 profiler to extract communication patterns from applications and a simulator
 capable of simulating application-aware dynamic interconnects.
 
-## MPI Profiler
+## Representation of Communication Pattern
 
 <!-- 通信パターンの定義 -->
-In this paper, we represent the communication pattern of an applications using
+In this paper, we represent the communication pattern of an application using
 the traffic matrix of the application. For an application composed of $n$
 processes, its traffic matrix is defined as a $n \times n$ square matrix $T$
 of which element $T_{ij}$ is equal to the volume of traffic sent from rank $i$
-to rank $j$. Here, we approximate that the volume of traffic between
-processes is constant during the execution of a job and compute the volume of
-traffic from the total number of bytes transferred between a process pair.
-The purpose of this approximation is to simplify and speed up the simulation.
+to rank $j$. Here, we approximate that the volume of traffic between processes
+is constant during the execution of a job. The traffic volume between a
+process pair is assumed to be the total bytes transferred divided by the
+duration of the application.
+
+This approximation is introduced to simplify and speed up the simulation. The
+idea behind this approximation is based on the fact that many HPC applications
+(_e.g._ partial differential equation solvers) show an iterative nature. These
+applications spend most of their execution time inside a repetitive loop and
+thus their communication patterns do not significantly change over time.
+Therefore, the traffic matrix can be a good representation of the
+communication characteristics of an iterative application despite the loss of
+temporal order. In future, we plan to apply trace segmentation\ [@Alawneh2016]
+techniques on the communication trace and divide it into multiple
+communication phases and then simulate each phase individually to further
+improve the accuracy of simulation for applications with significantly
+time-varying communication patterns.
+
+## MPI Profiler
 
 <!-- 既存のプロファイラの問題点 -->
 Initially, we tried to reuse existing MPI performance analysis tools such as
@@ -37,37 +52,6 @@ of point-to-point communication in MPI implementations. These underlying
 point-to-point communication are hidden from PMPI-based profilers and excluded
 from the communication patterns emitted by profilers.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics{tracer_block}
-    \caption{Block Diagram of MPI Profiler}
-    \label{fig:profiler-block}
-\end{figure}
-
-\begin{figure*}[t]
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{traffic_matrix}
-        \caption{Number of Total Bytes Transferred}
-        \label{fig:traffic-matrix}
-    \end{subfigure}
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{message_matrix}
-        \caption{Number of Messages Transferred}
-        \label{fig:message-matrix}
-    \end{subfigure}
-    \centering
-    \begin{subfigure}[b]{.32\linewidth}
-        \centering
-        \includegraphics[scale=.8]{message_size_histogram}
-        \caption{Distribution of Message Size}
-        \label{fig:message-size-histogram}
-    \end{subfigure}
-    \caption{Profiler Output for NERSC MILC Benchmark}
-    \label{fig:profiler-output}
-\end{figure*}
-
 <!-- PERUSEの紹介 -->
 To accurately capture the underlying point-to-point communication of collective
 communication, we have developed a profiler by utilizing the MPI Performance
@@ -86,12 +70,15 @@ initialization, the profiler subscribes to two PERUSE events:
 `PERUSE_COMM_REQ_XFER_BEGIN` and `PERUSE_COMM_REQ_XFER_END`. These events are
 emitted each time a transfer of a message begins and ends, respectively.
 Profiling results are written out as a JSON file during the finalization.
-During the execution of application, three statistics shown below are
-aggregated online by the profiler:
+During the execution of application, the total number of bytes transferred
+from a process to another is aggregated to compute the traffic matrix.
 
-- Total number of bytes transferred from a process to another
-- Number of messages transferred from a process to another
-- Distribution of message sizes
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{tracer_block}
+    \caption{Block Diagram of MPI Profiler}
+    \label{fig:profiler-block}
+\end{figure}
 
 <!-- プロファイラの動作説明 (コミュニケータ関係) -->
 Furthermore, the profiler hooks several MPI functions for creating and
@@ -110,13 +97,17 @@ environment variable is used to load the shared library before the execution
 of application.
 
 <!-- プロファイラの出力例 -->
-As an example of a profiler output, results obtained from running the NERSC
-MILC benchmark with 128 processes is shown in Fig.\ \ref{fig:profiler-output}.
-Figure\ \ref{fig:traffic-matrix} and Figure\ \ref{fig:message-matrix} are
-visualizations of total bytes and number of messages exchanged between
-processes, respectively. These visualizations clearly reveal the spatial
+As an example of a profiler output, the traffic matrix obtained from running
+the NERSC MILC benchmark with 128 processes is shown in
+Fig.\ \ref{fig:traffic-matrix}. This visualization clearly reveals the spatial
 locality and sparsity of the communication pattern.
-Figure\ \ref{fig:message-size-histogram} is a histogram of message sizes.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{traffic_matrix}
+    \caption{Number of Total Bytes Transferred}
+    \label{fig:traffic-matrix}
+\end{figure}
 
 ## Interconnect Simulator
 
@@ -188,11 +179,13 @@ minimum, average, variance and plotted.
 <!-- シミュレータの動作原理 -->
 The proposed simulator is based on a discrete-event simulation model. Under
 this model, the simulator maintains an event queue, which is a priority queue
-that contains a collection of future events ordered by its occurring time. At
-the beginning of the main loop, the earliest occurring event is
-popped from the event queue. Then, based on the type of the event, the
-corresponding event handler is called. An event handler may schedule new
-events. This loop is repeated until the event queue is empty.
+that contains a collection of future events ordered by its occurring time.
+There are different type of events representing a change of state in the
+simulator such as: a job arrived, a job started, a job finished, _etc_. At the
+beginning of the main loop, the earliest occurring event is popped from the
+event queue. Then, based on the type of the event, the corresponding event
+handler is called. An event handler may schedule new events. This loop is
+repeated until the event queue is empty.
 
 <!-- ジョブの視点で見たシミュレーション処理の流れ -->
 Figure\ \ref{fig:simulator-flowchart} illustrates the life cycle of a
