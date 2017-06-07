@@ -29,7 +29,7 @@ Two applications were selected as representatives of communication-intensive
 applications. The first one is the CG benchmark from the NAS Parallel
 Benchmark Suite\ [@Bailey1991]. The CG benchmark estimates the largest
 eigenvalue of a sparse matrix using the inverse power method. Internally it
-uses the conjugate gradient method, which appears frequently in irregular mesh
+uses the conjugate gradient method, which frequently appears in irregular mesh
 applications. The second one is an application (`ks_imp_dyn`) from MIMD
 Lattice Computation (MILC)\ [@milc], a collection of applications used to
 study Quantum Chromodynamics (QCD). We used the input dataset provided by
@@ -48,31 +48,31 @@ algorithms used in this experiment:
 
 - _Scheduling_: A simple First-Come First-Served (FCFS) scheduling without
   backfilling is adopted.
-- _Node Selection_: Either linear or random node selection is adopted.
+- _Node Selection_: Either _linear_ or _random_ node selection is adopted.
    Linear node selection assumes that computing nodes are lined up in a
    one-dimensional array and minimizes fragmentation. This is essentially the
    same as Slurm's default node selection policy. Random node selection
    randomly selects computing nodes. This algorithm simulates a situation
    where computing nodes are highly fragmented.
-- _Process Placement_: Either block or cyclic process placement is adopted.
+- _Process Placement_: Either _block_ or _cyclic_ process placement is adopted.
    Block process placement assigns rank $i$ to the $\lfloor i / c \rfloor$-th
    computing node where $c$ represents the number of cores per node. Cyclic
    process placement assigns rank $i$ to the $(i \bmod n)$-th computing
    node where $n$ denotes the number of computing nodes.
-- _Routing_: Either D-mod-K routing or a dynamic routing is adopted.
+- _Routing_: Either _D-mod-K_ routing or a _dynamic_ routing is adopted.
   \mbox{Destination-modulo-K} (\mbox{D-mod-K}) routing is a popular static
   load balancing routing algorithm that distributes packet flow over multiple
-  paths based on the destination address of the packet. A greedy dynamic
-  routing algorithm where routes are computed and allocated from the heaviest
+  paths based on the destination address of the packet. The dynamic routing
+  algorithm implemented here computes and allocates routes from the heaviest
   communicating process pair. A route is computed so as to minimize the
   traffic of the maximum-traffic link in the path.
 
 Under this condition, we measured and compared the maximum traffic load on
-links. Figure\ \ref{fig:nas-cg-multi-congestion} shows the simulation results
+links. Figure\ \ref{fig:nas-cg-multi-congestion} shows the simulation
 results in the case of the NAS CG benchmark. What stands out in this plot is
 that dynamic routing consistently achieves lower traffic load compared to
-static \mbox{D-mod-K} routing. The difference of traffic load was largest when
-linear node selection and block process placement is adopted. Under this
+static \mbox{D-mod-K} routing. The reduction of traffic load was largest when
+linear node selection and block process placement was adopted. Under this
 configuration, dynamic routing slashed maximum traffic load by 50% compared to
 \mbox{D-mod-K} routing. In addition, the graph reveals that cyclic process
 placement always increased maximum traffic load compared to block process
@@ -94,12 +94,12 @@ pattern.
     \label{fig:nersc-milc-multi-congestion}
 \end{figure}
 
-Figure\ \ref{fig:nersc-milc-multi-congestion} shows the result for the NERSC
-MILC benchmark. The graph reveals that dynamic routing outperforms
-\mbox{D-mod-K} routing again. In this case, the difference of link load is
-largest when random node selection and cyclic process placement is adopted.
-When using linear node selection and block process placement, the difference
-of maximum link load depending on the routing algorithm is 18%.
+Figure\ \ref{fig:nersc-milc-multi-congestion} shows the result in the case of
+the NERSC MILC benchmark. The graph reveals that dynamic routing outperforms
+\mbox{D-mod-K} routing again. In this case, the reduction of link load was
+largest when random node selection and cyclic process placement was adopted.
+When using linear node selection and block process placement, the reduction
+of maximum link load was 18%.
 
 ## Benchmark Results
 
@@ -114,7 +114,10 @@ Figure\ \ref{fig:nas-cg-time} shows the comparison for NAS CG benchmark.
 The graph indicates that the use of dynamic routing reduced the execution time
 of the benchmark for 23%. Figure\ \ref{fig:nersc-milc-time} shows the result
 for NERSC MILC benchmark. In this case, approximately 8% was reduced in
-execution time. These results suggest that the use of dynamic interconnect
+execution time.
+
+
+These results suggest that the use of dynamic interconnect
 control reduces traffic load on the bottleneck link and therefore reduces the
 execution time of applications.
 

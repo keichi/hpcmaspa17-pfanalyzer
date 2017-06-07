@@ -105,7 +105,7 @@ locality and sparsity of the communication pattern.
 \begin{figure}[htbp]
     \centering
     \includegraphics{traffic_matrix}
-    \caption{Number of Total Bytes Transferred}
+    \caption{Traffic Matrix for NERSC MILC}
     \label{fig:traffic-matrix}
 \end{figure}
 
