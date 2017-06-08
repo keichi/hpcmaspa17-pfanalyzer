@@ -8,7 +8,7 @@ capable of simulating application-aware dynamic interconnects.
 
 ## Representation of Communication Pattern
 
-<!-- 通信パターンの定義 -->
+<!-- 通信パターンとしてトラフィックマトリクスを使う -->
 In this paper, we represent the communication pattern of an application using
 the traffic matrix of the application. For an application composed of $n$
 processes, its traffic matrix is defined as a $n \times n$ square matrix $T$
@@ -18,6 +18,7 @@ is constant during the execution of a job. The traffic volume between a
 process pair is assumed to be the total bytes transferred divided by the
 duration of the application.
 
+<!-- トラフィックマトリクスで近似することの正当性 -->
 This approximation is introduced to simplify and speed up the simulation. The
 idea behind this approximation is based on the fact that many HPC applications
 (_e.g._ partial differential equation solvers) show an iterative nature. These
