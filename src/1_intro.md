@@ -83,14 +83,14 @@ existing simulators mostly focused on static interconnects and few researches
 have been done to simulate dynamic and application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
-This paper describes the design and implementation of an
-interconnect simulator specialized for dynamic interconnects to facilitate the
-research and development of such interconnects. Our simulator takes
-a set of communication patterns of applications and a cluster configuration as
-its input and then simulates the traffic on each link of the interconnect.
-In addition to the simulator, we have developed a custom profiler to extract
-communication patterns from applications for use in conjunction with our
-proposed simulator.
+This paper describes the design and implementation of PFAnalyzer, a toolset
+for analyzing  application-aware dynamic interconnects. PFAnalyzer consists of
+two components: PFSim and PFProf. PFSim is an interconnect simulator
+specialized for application-aware dynamic interconnects. PFSim takes a set of
+communication patterns of applications and a cluster configuration as its
+input and then simulates the traffic on each link of the interconnect. PFProf
+In is a custom profiler to extract communication patterns from applications
+for use in conjunction with PFSim.
 
 <!-- この論文の貢献 -->
 The contributions of this paper are summarized as follows:
@@ -107,8 +107,8 @@ The rest of this paper is organized as follows.
 Section\ \ref{research-objective} examines the requirements of an interconnect
 simulator for dynamic and application-aware interconnects.
 Section\ \ref{related-work} reviews related work. Section\ \ref{proposal}
-describes the design and implementation of our presented simulator and
-profiler. Section\ \ref{evaluation} presents the simulation results for
-NAS CG benchmark and MILC obtained with our proposed simulator. Furthermore,
-results of a verification experiment on a physical cluster is shown.
-Section\ \ref{conclusion} concludes this paper and outlines our future work.
+describes the design and implementation of PFAnalyzer.
+Section\ \ref{evaluation} presents the simulation results for NAS CG benchmark
+and MILC obtained with our proposed simulator. Furthermore, results of a
+verification experiment on a physical cluster is shown. Section\
+\ref{conclusion} concludes this paper and outlines our future work.

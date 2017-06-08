@@ -67,7 +67,7 @@
 
 \begin{document}
 
-\title{A Toolset for Analyzing Application-aware Dynamic Interconnects}
+\title{PFAnalyzer: A Toolset for Analyzing Application-aware Dynamic Interconnects}
 
 \author{%
     \IEEEauthorblockN{%
@@ -78,7 +78,7 @@
         Shinji Shimojo
     } \\
     \IEEEauthorblockA{%
-        Osaka University\\
+        Cybermedia Center, Osaka University\\
         Osaka, Japan\\
         \{takahashi.keichi, huchka\}@ais.cmc.osaka-u.ac.jp,
         \{date, kido, shimojo\}@cmc.osaka-u.ac.jp
@@ -103,11 +103,12 @@
     for the simulation of packet flow in dynamically controlled interconnects,
     while simulators for static interconnects have been extensively researched
     and developed. To facilitate the analysis on the performance
-    characteristics of dynamic interconnects, we have developed a simulator
-    specialized for dynamic interconnects. Our simulator allows interconnect
-    researchers and designers to investigate the congestion in the
-    interconnect for an arbitrary cluster configuration and a set of
-    communication patterns collected by a custom tool. The toolset is used
+    characteristics of dynamic interconnects, we have developed PFAnalyzer.
+    PFAnalyzer is a toolset composed of PFSim, an interconnect simulator
+    simulator specialized for dynamic interconnects, and PFProf, a profiler.
+    PFSim allows interconnect researchers and designers to investigate the
+    congestion in the interconnect for an arbitrary cluster configuration and
+    a set of communication patterns collected by PFProf. PFAnalyzer is used
     to demonstrate how dynamically controlling the interconnects can reduce
     congestion and potentially improve the performance of applications.
 \end{abstract}
