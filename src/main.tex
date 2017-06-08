@@ -3,6 +3,7 @@
 % Package imports
 \usepackage[style=ieee]{biblatex}
 \usepackage[english]{babel}
+\usepackage{color}
 \usepackage{csquotes}
 \usepackage{enumitem}
 \usepackage{fancyvrb}
@@ -35,24 +36,31 @@
 
 % Source code
 \lstset{%
-  language={C},
-  basicstyle={\small\ttfamily},%
-  identifierstyle={\small\ttfamily},%
-  commentstyle={\small\itshape},%
-  keywordstyle={\small\bfseries},%
-  ndkeywordstyle={\small\ttfamily},%
-  stringstyle={\small\ttfamily},
-  frame={tb},
-  breaklines=true,
-  columns=[l]{fullflexible},%
-  numbers=none,%
-  xrightmargin=0em,%
-  xleftmargin=0em,%
-  numberstyle={\scriptsize},%
-  stepnumber=1,
-  numbersep=1em,%
-  lineskip=-0.5ex,%
-  mathescape%
+    aboveskip=1em,
+    belowskip=1em,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color[RGB]{33,74,135}\bfseries,
+    stringstyle=\color[RGB]{79,153,5},
+    commentstyle=\color[RGB]{143,89,2}\itshape,
+    numberstyle=\footnotesize,
+    numbers=none,
+    stepnumber=1,
+    numbersep=15pt,
+    backgroundcolor=\color[RGB]{251,251,251},
+    frame=single,
+    frameround=tttt,
+    framesep=5pt,
+    rulecolor=\color[RGB]{148,150,152},
+    breaklines=true,
+    breakautoindent=true,
+    breakatwhitespace=true,
+    breakindent=25pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    captionpos=b,
+    linewidth=\textwidth,
 }
 
 \addbibresource{references.bib}
@@ -86,7 +94,7 @@
     interconnects. As a result, current static and over-provisioned
     interconnects are becoming cost-ineffective. From the background, we have
     been currently working on the integration of network programmability into
-    the interconnect control, based on the idea that dynamically optimizing
+    the interconnect control, based on the idea that dynamically controlling
     the packet flow in the interconnect according to the communication pattern
     of applications can increase the utilization of interconnects and improve
     application performance. Interconnect simulators come in handy especially
@@ -96,10 +104,10 @@
     while simulators for static interconnects have been extensively researched
     and developed. To facilitate the analysis on the performance
     characteristics of dynamic interconnects, we have developed a simulator
-    specialized to dynamic interconnects. Our simulator allows interconnect
+    specialized for dynamic interconnects. Our simulator allows interconnect
     researchers and designers to investigate the congestion in the
     interconnect for an arbitrary cluster configuration and a set of
-    communication patterns collected by a dedicated tool. The toolset is used
+    communication patterns collected by a custom tool. The toolset is used
     to demonstrate how dynamically controlling the interconnects can reduce
     congestion and potentially improve the performance of applications.
 \end{abstract}

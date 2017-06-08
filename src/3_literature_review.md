@@ -10,14 +10,12 @@ communication patterns converted from traces of MPI applications can be fed
 into the simulator. A limitation of LogGOPSim is that the interconnect is
 assumed to have full bisection bandwidth and congestion is not simulated.
 These two simulators can provide accurate performance predictions owing to
-their per-message simulation capability.
-
-However, the topology and the routing algorithm of interconnects are
-abstracted away in the network models of PSINS and LogGOPSim. Therefore, these
-simulators cannot be used for predicting and comparing the performance of
-different topologies or routing algorithms. In contrast, our simulator allows
-users to compare the performance characteristic of different topologies and
-routing algorithms.
+their per-message simulation capability. However, the topology and the routing
+algorithm of interconnects are abstracted in the network models of PSINS
+and LogGOPSim. Therefore, these simulators cannot be used for predicting and
+comparing the performance of different topologies or routing algorithms. In
+contrast, the simulator targeted in this paper allows users to compare the
+performance characteristic of different topologies and routing algorithms.
 
 ORCS\ [@Schneider2009] simulates the traffic load of each link in the
 interconnect for a given topology, communication pattern and routing
@@ -33,8 +31,8 @@ characteristics of an SDN-based multipath routing algorithm for data center
 networks. A simulator is developed based on MiniSSF to simulate the throughput
 and delay of a packet flow under diverse settings. However, communication
 patterns are randomly generated and not based on real-world applications. Our
-proposed simulator accepts arbitrary communication patterns obtained from
-real-world applications using our custom profiler.
+proposed simulator is designed to accept arbitrary communication patterns
+obtained from real-world applications using our custom profiler.
 
 $\mathit{INAM}^2$ [@Subramoni2016] is a comprehensive tool to monitor and
 analyze network activities in an InfiniBand network. The tight integration

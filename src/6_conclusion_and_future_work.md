@@ -9,7 +9,8 @@ communication patterns of applications and a cluster configuration as its
 input and then simulates the traffic on each link of the interconnect.
 
 Further work is needed to investigate the performance characteristics of
-dynamic interconnects on large-scale and highly-parallel clusters. Moreover,
-application-aware node selection and process placement algorithms should be
-implemented on the proposed simulator and investigated their effect on the
-performance of dynamic interconnects.
+dynamic interconnects on large-scale and highly-parallel clusters.
+
+Moreover, application-aware node selection and process placement algorithms
+should be implemented on the proposed simulator and inspect their effect on
+the performance of dynamic interconnects.

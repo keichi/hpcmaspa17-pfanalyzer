@@ -27,10 +27,10 @@ thus their communication patterns do not significantly change over time.
 Therefore, the traffic matrix can be a good representation of the
 communication characteristics of an iterative application despite the loss of
 temporal order. In future, we plan to apply trace segmentation\ [@Alawneh2016]
-techniques on the communication trace and divide it into multiple
-communication phases and then simulate each phase individually to further
-improve the accuracy of simulation for applications with significantly
-time-varying communication patterns.
+techniques on the communication trace. This technique would segment a trace
+into multiple communication phases, which could then be simulated individually
+to further improve the accuracy of simulation for applications with
+significantly time-varying communication patterns.
 
 ## MPI Profiler
 
@@ -46,12 +46,12 @@ MPI_Allreduce and MPI_Reduce).
 The reason can be explained as follows. Existing MPI profilers replace the
 standard MPI functions provided by MPI libraries with instrumented functions
 by utilizing the MPI Profiling Interface (PMPI). An advantage of this approach
-is that it works regardless of a specific MPI implementation. However, it
-fails to capture the internal information of the MPI library. Meanwhile,
-collective communication functions are internally implemented as a combination
-of point-to-point communication in MPI implementations. These underlying
-point-to-point communication are hidden from PMPI-based profilers and excluded
-from the communication patterns emitted by profilers.
+is that it works regardless of a specific MPI implementation. However, this
+approach fails to capture the internal information of the MPI library.
+Meanwhile, collective communication functions are internally implemented as a
+combination of point-to-point communication in MPI implementations. These
+underlying point-to-point communication are hidden from PMPI-based profilers
+and excluded from the communication patterns emitted by profilers.
 
 <!-- PERUSEの紹介 -->
 To accurately capture the underlying point-to-point communication of collective
@@ -99,14 +99,14 @@ of application.
 
 <!-- プロファイラの出力例 -->
 As an example of a profiler output, the traffic matrix obtained from running
-the NERSC MILC benchmark with 128 processes is shown in
-Fig.\ \ref{fig:traffic-matrix}. This visualization clearly reveals the spatial
-locality and sparsity of the communication pattern.
+MILC with 128 processes is shown in Fig.\ \ref{fig:traffic-matrix}. This
+visualization clearly reveals the spatial locality and sparsity of the
+communication pattern.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics{traffic_matrix}
-    \caption{Traffic Matrix for NERSC MILC}
+    \caption{Traffic Matrix for MILC}
     \label{fig:traffic-matrix}
 \end{figure}
 
@@ -123,20 +123,33 @@ load imbalance in the interconnect. These insights on the interconnect can be
 useful for designing better algorithms for controlling the packet flow in
 application-aware dynamic interconnects.
 
+<!-- シミュレータの動作原理 -->
+The simulator is based on a discrete-event simulation model. Under
+this model, the simulator maintains an event queue, which is a priority queue
+that contains a collection of future events ordered by its occurring time.
+There are different type of events representing a change of state in the
+simulator such as: a job arrived, a job started, a job finished, _etc_. At the
+beginning of the main loop, the earliest occurring event is popped from the
+event queue. Then, based on the type of the event, the corresponding event
+handler is called. An event handler may schedule new events. This loop is
+repeated until the event queue is empty.
+
 <!-- シミュレータの入力 (シナリオ)-->
-Figure\ \ref{fig:simulator-block} shows the input and output for our
-simulator. The simulation scenario file defines various configurations for a
-simulation run. This file defines the cluster configuration to use and set of
-jobs. Moreover, algorithms that control the execution and communication of
-jobs as shown in Table\ \ref{tbl:simulator-algorithm} are specified. The
-cluster configuration file defines the topology of the interconnect, capacity
-of links and number of processing elements for each computing node. This file
-is described in GraphML\ [@Brandes2013], an XML-based markup language for
-graphs. Popular graph visualization tools such as Cytoscape\ [@Shannon2003]
-and Gephi\ [@Bastian2009] can be used to view and edit GraphML files.
+Figure\ \ref{fig:simulator-block} illustrates how our simulator works. The
+simulation scenario file defines various configurations for a simulation run.
+This file defines the cluster configuration to use and set of jobs. Moreover,
+algorithms that control the execution and communication of jobs are specified
+as shown in Table\ \ref{tbl:simulator-algorithm}. An example of a simulation
+scenario file is shown in Listing\ \ref{lst:simulation-scenario}. The cluster
+configuration file defines the topology of the interconnect, capacity of links
+and number of processing elements for each computing node. This file is
+described in GraphML\ [@Brandes2013], an XML-based markup language for graphs.
+Popular graph visualization tools such as Cytoscape\ [@Shannon2003] and
+Gephi\ [@Bastian2009] can be used to view and edit GraphML files.
 Communication pattern files are obtained from applications using our custom
 profiler described in the previous section \ref{mpi-profiler}.
 
+<!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
 \begin{figure}[htbp]
     \centering
     \includegraphics{simulator_block}
@@ -144,7 +157,6 @@ profiler described in the previous section \ref{mpi-profiler}.
     \label{fig:simulator-block}
 \end{figure}
 
-<!-- シミュレータの入力 (クラスタ構成と通信パターン) -->
 Each configuration value can be a list of values. In that case, the simulation
 is executed multiple times, each time with a different combination of
 configuration values until all combinations are completed.
@@ -169,24 +181,45 @@ configuration values until all combinations are completed.
     \end{tabularx}
 \end{table}
 
+```{caption="Example of a Simulation Scenario" label="lst:simulation-scenario" linewidth=\columnwidth}
+topology: topologies/milk.graphml
+output: output/milk-cg-dmodk
+algorithms:
+  scheduler:
+    - picosim.scheduler.FCFSScheduler
+  host_selector:
+    - picosim.host_selector.LinearHostSelector
+    - picosim.host_selector.RandomHostSelector
+  process_mapper:
+    - picosim.process_mapper.LinearProcessMapper
+    - picosim.process_mapper.CyclicProcessMapper
+  router:
+    - picosim.router.DmodKRouter
+    - picosim.router.GreedyRouter
+    - picosim.router.GreedyRouter2
+jobs:
+  - submit:
+      distribution: picosim.math.ExponentialDistribution
+      params:
+        lambd: 0.1
+    trace: traces/cg-c-128.tar.gz
+...
+```
+
 <!-- シミュレータの出力 -->
 The simulator can create a snapshot of the traffic distribution in the
 interconnect at arbitrary time and output is as a GraphML file. By visualizing
 the acquired GraphML using the aforementioned graph visualization tools, users
 can intuitively locate bottleneck links and load imbalance. Furthermore, the
 traffic load of links can be summarized into statistics such as maximum,
-minimum, average, variance and plotted.
+minimum, average, variance and plotted as graphs.
 
-<!-- シミュレータの動作原理 -->
-The proposed simulator is based on a discrete-event simulation model. Under
-this model, the simulator maintains an event queue, which is a priority queue
-that contains a collection of future events ordered by its occurring time.
-There are different type of events representing a change of state in the
-simulator such as: a job arrived, a job started, a job finished, _etc_. At the
-beginning of the main loop, the earliest occurring event is popped from the
-event queue. Then, based on the type of the event, the corresponding event
-handler is called. An event handler may schedule new events. This loop is
-repeated until the event queue is empty.
+\begin{figure}[h]
+    \centering
+    \includegraphics{simulator_flowchart}
+    \caption{Life Cycle of a Simulated Job}
+    \label{fig:simulator-flowchart}
+\end{figure}
 
 <!-- ジョブの視点で見たシミュレーション処理の流れ -->
 Figure\ \ref{fig:simulator-flowchart} illustrates the life cycle of a
@@ -207,10 +240,3 @@ route is increased. After all routes are computed, the simulator waits until
 the job has finished. Then, the traffic for each link that was utilized by the
 job is decreased. Finally, computing nodes are deallocated and the job is
 marked as completed.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{simulator_flowchart}
-    \caption{Life Cycle of a Simulated Job}
-    \label{fig:simulator-flowchart}
-\end{figure}
