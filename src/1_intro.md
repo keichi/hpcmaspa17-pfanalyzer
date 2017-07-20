@@ -27,7 +27,7 @@ Nowadays, the majority of HPC clusters employ the former static interconnects
 because of the low implementation cost. Since static interconnects are
 controlled without taking the communication patterns of individual
 applications into account, they are usually designed to be able to accommodate
-the worst-case traffic demand to achieve a good performance for a variety of
+the worst-case traffic demand to achieve good performance for a variety of
 applications, each of which has a different communication pattern.
 Interconnect designers have respected criteria such as full bisection
 bandwidth and nonblockingness.
@@ -40,10 +40,10 @@ large-scale and complex. This technical trend is making static and
 over-provisioned interconnects cost-ineffective and difficult to build.
 
 <!-- 動的な相互結合網の提案 + SDN-enhanced MPI -->
-Based on the background and trend, we have been seeking for the feasibility
-and applicability of the network programmability of dynamic interconnects to
+Based on the background and trend, we study the feasibility
+and applicability of programming dynamic interconnect within
 HPC\ [@Date2016]. In particular, _SDN-enhanced MPI_\ [@Takahashi2014;
-@Dashdavaa2013], which is a framework that incorporates the dynamic network
+@Dashdavaa2013], a framework that incorporates the dynamic network
 controllability of Software-Defined Networking (SDN)\ [@sdn] into MPI, has been
 researched based on the idea that dynamically optimizing the packet flow in
 the interconnect according to the communication patterns of applications can
@@ -59,14 +59,14 @@ MPI function called by the application.
 More generally, algorithms for efficiently controlling the packet flow in
 the interconnect depending on the communication patterns of applications is
 essential towards realizing a dynamic and application-aware interconnect. In
-order to develop a generic algorithm that achieves a good performance on a
+order to develop a generic algorithm that achieves good performance on a
 variety of environments, the algorithm must be investigated and evaluated
 targeting different applications and interconnects. However, utilizing
 physical clusters to analyze the performance characteristics of the
 interconnect is restricted in the following points. First, the execution time
 of real-world HPC applications typically ranges from hours up to days,
-sometimes even month. Second, large-scale deployments of dynamic interconnects
-that allow execution of highly parallel applications have not be seen yet
+sometimes even months. Second, large-scale deployments of dynamic interconnects
+that allow execution of highly parallel applications have not yet been seen
 because research and development of dynamic interconnects are still at their
 early stage. Third, network hardware such as switches may not support
 measuring traffic in the interconnect with enough high frequency and precision
@@ -75,11 +75,11 @@ to obtain meaningful insights.
 <!-- シミュレータの有用性 -->
 To accelerate the research and development of application-aware dynamic
 interconnects that control packet flow in response to the communication
-patterns of applications, some interconnect simulator that allows users to to
+patterns of applications, an interconnect simulator that allows users to
 conduct systematic investigation of clusters with diverse topologies and
 parameters is vitally demanded. A wide spectrum of interconnect simulators
 have been developed with different focus and purpose until today. However,
-existing simulators mostly focused on static interconnects and few researches
+existing simulators mostly focused on static interconnects and little research
 have been done to simulate dynamic and application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
@@ -89,7 +89,7 @@ two components: PFSim and PFProf. PFSim is an interconnect simulator
 specialized for application-aware dynamic interconnects. PFSim takes a set of
 communication patterns of applications and a cluster configuration as its
 input and then simulates the traffic on each link of the interconnect. PFProf
-In is a custom profiler to extract communication patterns from applications
+is a custom profiler to extract communication patterns from applications
 for use in conjunction with PFSim.
 
 <!-- この論文の貢献 -->

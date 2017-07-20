@@ -1,6 +1,6 @@
 # Related Work
 
-Several interconnect simulators have been proposed in the past researches.
+Several interconnect simulators have been proposed in past research.
 PSINS\ [@Tikir2009] is a trace-driven simulator for HPC applications.
 Traces obtained from applications are used to predict the performance of
 applications on a variety of HPC clusters with different configurations.

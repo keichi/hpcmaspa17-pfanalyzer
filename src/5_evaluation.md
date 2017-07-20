@@ -124,7 +124,7 @@ and block process placement was adopted. The average execution time of 10 runs
 was compared when using \mbox{D-mod-K} routing and dynamic routing.
 Figure\ \ref{fig:nas-cg-time} shows the comparison for NAS CG benchmark. The
 graph indicates that the use of dynamic routing reduced the execution time of
-the benchmark for 23%. Figure\ \ref{fig:nersc-milc-time} shows the result for
+the benchmark to 23%. Figure\ \ref{fig:nersc-milc-time} shows the result for
 MILC. In this case, approximately 8% was reduced in execution time.
 
 These results suggest that application performance is actually improved by

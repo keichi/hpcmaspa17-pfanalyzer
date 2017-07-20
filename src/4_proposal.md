@@ -225,7 +225,7 @@ jobs:
 <!-- ジョブの視点で見たシミュレーション処理の流れ -->
 Figure\ \ref{fig:simulator-flowchart} illustrates the life cycle of a
 simulated job. On arrival of a new job, the job is initially enqueued to the
-job queue. As soon as there are unallocated computing nodes enough to execute
+job queue. As soon as there are enough unallocated computing nodes to execute
 a job, the scheduling algorithm determines the job to be executed next and
 pops it from the job queue. Subsequently, the node selection algorithm picks a
 set of computing nodes that can satisfy the requested number of processes by
