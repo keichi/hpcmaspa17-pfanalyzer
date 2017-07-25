@@ -30,7 +30,7 @@ applications into account, they are usually designed to be able to accommodate
 the worst-case traffic demand to achieve good performance for a variety of
 applications, each of which has a different communication pattern.
 Interconnect designers have respected criteria such as full bisection
-bandwidth and nonblockingness.
+bandwidth and nonblocking networks.
 
 <!-- 相互結合網の大規模・複雑化と静的な相互結合網の限界 -->
 The continuously growing demand for computing power from academia and industry
