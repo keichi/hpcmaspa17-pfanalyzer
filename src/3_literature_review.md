@@ -38,8 +38,8 @@ $\mathit{INAM}^2$ [@Subramoni2016] is a comprehensive tool to monitor and
 analyze network activities in an InfiniBand network. The tight integration
 with the job scheduler and a co-designed MPI library allows $\mathit{INAM}^2$
 to associate network activities with jobs and MPI processes. For instance, it
-can identify hot spots in the interconnect and inspect which node, job and
+can identify hot spots in the interconnect and inspect which node, job, and
 process is causing the congestion. Although $\mathit{INAM}^2$ is a useful tool
-for system administrators to diagnose performance issues of interconnects, it
+for system administrators to diagnose the performance issues of interconnects, it
 is not suitable for studying diverse interconnects since it only supports
 physical clusters.

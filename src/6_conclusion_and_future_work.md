@@ -10,8 +10,8 @@ input and then simulates the traffic on each link of the interconnect.
 Our evaluation shows how dynamically controlling the interconnects can reduce
 congestion and potentially improve the performance of applications.
 
-Further works are necessary to investigate the performance characteristics of
-dynamic interconnects on large-scale and highly-parallel clusters. Moreover,
+Further work is necessary to investigate the performance characteristics of
+dynamic interconnects on large-scale and highly parallel clusters. Moreover,
 we plan to implement application-aware node selection and process placement
-algorithms on PFSim. The impact of such application-aware algorithm on the
+algorithms on PFSim. The impact of such application-aware algorithms on the
 performance of dynamic interconnects should be evaluated.

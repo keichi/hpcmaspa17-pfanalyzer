@@ -3,7 +3,7 @@
 In this paper, we aim to realize an interconnect simulator specialized for
 application-aware dynamic interconnects to facilitate the research and
 development of application-aware dynamic interconnects. Most interconnect
-simulators proposed in the previous researches\ [@Schneider2009; @Tikir2009;
+simulators proposed in the previous research\ [@Schneider2009; @Tikir2009;
 @Hoefler2010; @Jo2015] are designed to study the behavior of static
 interconnects. Therefore, packet flow is controlled based on static routing
 algorithms in these simulators.
@@ -14,8 +14,8 @@ dynamic interconnects. Based on this necessity, the requirements for our
 simulator are described as follows:
 
 - _Support for application-aware dynamic routing_: The simulator should allow
-  users to implement dynamic routing algorithms for mitigating load imbalance
-  and improving utilization of the interconnect. In addition, the routing
+  users to implement dynamic routing algorithms to mitigate load imbalance
+  and improve utilization of the interconnect. In addition, the routing
   algorithms should be supplied with the communication patterns of
   applications and packet flow in the interconnect to make effective routing
   decisions.
@@ -33,12 +33,12 @@ simulator are described as follows:
   targeted.
 - _Support for diverse cluster configurations_: The distribution of packet
   flow in the interconnect is determined by not only the routing algorithm but
-  also the topology of the interconnect. Also, the job scheduling, node
+  also the topology of the interconnect. In addition, job scheduling, node
   selection and process placement algorithms need to be considered. These
   parameters should be easily reconfigurable to allow users to perform a
   systematic investigation of diverse clusters.
 
 Furthermore, the simulator should be designed to be lightweight and fast to
-carry out large number of simulations with different parameters in a
+carry out a large number of simulations with different parameters in a
 reasonable amount of time. If necessary, appropriate approximation should be
 introduced to improve simulation performance.

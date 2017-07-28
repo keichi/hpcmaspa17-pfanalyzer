@@ -40,17 +40,17 @@ large-scale and complex. This technical trend is making static and
 over-provisioned interconnects cost-ineffective and difficult to build.
 
 <!-- 動的な相互結合網の提案 + SDN-enhanced MPI -->
-Based on the background and trend, we study the feasibility
+Based on this background and these trends, we study the feasibility
 and applicability of programming dynamic interconnect within
 HPC\ [@Date2016]. In particular, _SDN-enhanced MPI_\ [@Takahashi2014;
 @Dashdavaa2013], a framework that incorporates the dynamic network
 controllability of Software-Defined Networking (SDN)\ [@sdn] into MPI, has been
 researched based on the idea that dynamically optimizing the packet flow in
 the interconnect according to the communication patterns of applications can
-increase the utilization of interconnect and improve application performance.
+increase the utilization of the interconnect and improve application performance.
 The goal of SDN-enhanced MPI is to accelerate individual MPI functions by
-dynamically optimizing the packet flow in the interconnect. So far, several
-MPI functions have been successfully accelerated in our previous works. One of
+dynamically optimizing the packet flow in the interconnect. Several
+MPI functions have been successfully accelerated in our previous works so far. One of
 the core challenges in the research of SDN-enhanced MPI is to develop
 algorithms to control the packet flow in the interconnect depending on the
 MPI function called by the application.
@@ -61,7 +61,7 @@ the interconnect depending on the communication patterns of applications is
 essential towards realizing a dynamic and application-aware interconnect. In
 order to develop a generic algorithm that achieves good performance on a
 variety of environments, the algorithm must be investigated and evaluated
-targeting different applications and interconnects. However, utilizing
+by targeting different applications and interconnects. However, utilizing
 physical clusters to analyze the performance characteristics of the
 interconnect is restricted in the following points. First, the execution time
 of real-world HPC applications typically ranges from hours up to days,
@@ -80,7 +80,7 @@ conduct systematic investigation of clusters with diverse topologies and
 parameters is vitally demanded. A wide spectrum of interconnect simulators
 have been developed with different focus and purpose until today. However,
 existing simulators mostly focused on static interconnects and little research
-have been done to simulate dynamic and application-aware interconnects.
+has been done to simulate dynamic and application-aware interconnects.
 
 <!-- この論文でつくるシミュレータ -->
 This paper describes the design and implementation of PFAnalyzer, a toolset
@@ -110,5 +110,5 @@ Section\ \ref{related-work} reviews related work. Section\ \ref{proposal}
 describes the design and implementation of PFAnalyzer.
 Section\ \ref{evaluation} presents the simulation results for NAS CG benchmark
 and MILC obtained with our proposed simulator. Furthermore, results of a
-verification experiment on a physical cluster is shown. Section\
+verification experiment on a physical cluster are shown. Section\
 \ref{conclusion} concludes this paper and outlines our future work.
