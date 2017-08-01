@@ -125,9 +125,9 @@ useful for designing better algorithms for controlling the packet flow in
 application-aware dynamic interconnects.
 
 <!-- シミュレータの動作原理 -->
-PFSim is based on a discrete-event simulation model. Under
-this model, the simulator maintains an event queue, which is a priority queue
-that contains a collection of future events ordered by the event's occurring time.
+PFSim is based on a discrete-event simulation model. Under this model, each
+event holds an attribute indicating when it will occur. Events are stored in a
+priority queue in an increasing manner by the time they occur.
 There are different type of events representing a change of state in the
 simulator such as: a job arrived, a job started, a job finished, _etc_. At the
 beginning of the main loop, the earliest occurring event is popped from the
