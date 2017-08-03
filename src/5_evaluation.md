@@ -26,7 +26,7 @@ illustrated in Fig.\ \ref{fig:cluster-config}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=.9]{cluster_config}
+    \includegraphics{cluster_config}
     \caption{Simulated Cluster with Fat-Tree Interconnect}
     \label{fig:cluster-config}
 \end{figure}
@@ -95,14 +95,14 @@ the locality of the communication pattern.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{nas_cg_multi_congestion}
+    \includegraphics[scale=.9]{nas_cg_multi_congestion}
     \caption{Comparison of Maximum Traffic (NAS CG)}
     \label{fig:nas-cg-multi-congestion}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{nersc_milc_multi_congestion}
+    \includegraphics[scale=.9]{nersc_milc_multi_congestion}
     \caption{Comparison of Maximum Traffic (MILC)}
     \label{fig:nersc-milc-multi-congestion}
 \end{figure}
