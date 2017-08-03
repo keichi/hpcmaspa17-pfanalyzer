@@ -119,7 +119,10 @@ was 18%.
 To investigate the impact of traffic load on the application performance of an
 actual environment, we reproduced the configuration described in the previous
 section \ref{simulation-results} on a physical cluster and then measured the
-execution time of each benchmark. In this experiment, linear node selection
+execution time of each benchmark. This cluster was equipped with switches that
+support OpenFlow, which is a de facto standard implementation of SDN.
+The routing algorithms were implemented based on OpenFlow.
+In this experiment, linear node selection
 and block process placement was adopted. The average execution time of 10 runs
 was compared when using \mbox{D-mod-K} routing and dynamic routing.
 Figure\ \ref{fig:nas-cg-time} shows the comparison for the NAS CG benchmark. The
